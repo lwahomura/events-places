@@ -1,0 +1,101 @@
+Создание таблицы арнедодателя:
+
+CREATE TABLE Landlord (ID_Landlords int NOT NULL PRIMARY KEY, FIO_Landlords varchar(255), Number_Landlords varchar(255));
+
+Создание таблицы организатора:
+
+CREATE TABLE organizer (ID_Organizers int NOT NULL PRIMARY KEY, FIO_Organizers varchar(255), Number_Organizers varchar(255));
+
+Создание таблицы посетителей:
+
+CREATE TABLE visitors (ID_Visitors int NOT NULL PRIMARY KEY, FIO_Visitors varchar(255), Number_Visitors varchar(255),events int REFERENCES events(id_events) ON DELETE CASCADE);
+
+
+Создание таблицы мероприятий:
+
+CREATE TABLE events (id_events int NOT NULL PRIMARY KEY, organizer int REFERENCES organizer(ID_Organizers) ON DELETE CASCADE,  event_type varchar(255), visitors int, event_date date);
+
+
+Создание таблицы помещений:
+
+CREATE TABLE room (ID_rooms int NOT NULL PRIMARY KEY, number_room int, delivery_date date, cost int, quare int, landlord int REFERENCES landlord(id_landlords) ON DELETE CASCADE ON UPDATE CASCADE, events int REFERENCES events(id_events) ON DELETE CASCADE ON UPDATE CASCADE, free boolean);
+
+Создание таблицы зарегестрированных:
+
+CREATE TABLE registred (id_registred int NOT NULL PRIMARY KEY, login varchar(255), password_ varchar(255), user_type int);
+
+Создание таблицы заявок:
+
+CREATE TABLE orders (id_orders int NOT NULL PRIMARY KEY,FIO_orderman varchar(255), orders varchar(255),completed boolean);
+ 
+Незарегистрированный пользователь:
+	
+Как он видит таблицу мероприятий:
+
+SELECT id_events, event_type, event_date from events;
+
+Как он видит таблицу помещений:
+SELECT id_rooms, number_room, events from room;
+
+Добавление посетителя:
+
+INSERT INTO visitors values(1,'Волков Артем Игоревич', '555-555-555', 1);
+UPDATE events SET visitors = (select count(*) from visitors where id_events = events);
+
+	
+Арендодатель:
+
+Как он видит таблицу организаторов:
+
+SELECT * from organizer;
+
+Как он видит таблицу арендодателей:
+
+SELECT * from landlord;
+
+Оставление заявки:
+
+INSERT INTO orders values (1, 'Путягин В.А.', 'Сдать БД', FALSE);
+
+Добавление помещения:
+
+INSERT INTO room values (2,34, '23-12-2015', 35000, 250,1,NULL, true);
+
+Регистрация:
+
+INSERT INTO registred values (1,'myname221','12345',1);
+
+Организатор:
+
+Регистрация:
+
+INSERT INTO registred values (1,'myname221','12345',2);
+
+Добавление мероприятия:
+
+INSERT INTO events values (2,1,'концерт имени меня',0, '25-12-2018' );
+update room set events = 2;
+update room set free = false;
+
+
+Просмотр посетителей:
+
+SELECT * from visitors;
+
+Просмотр арендодателей:
+
+SELECT * from landlord;
+
+Просмотр организаторов:
+
+SELECT * from organizer;
+
+Оставить заявку:
+
+INSERT INTO orders values (1, 'Путягин В.А.', 'Сдать БД', FALSE);
+
+Просмотр помещений:
+
+SELECT * FROM room where free = TRUE
+
+
