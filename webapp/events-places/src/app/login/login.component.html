@@ -1,7 +1,17 @@
-<body>
-<div class = "form-login">
-  <input type="text" [(ngModel)]="user.username" name="username" placeholder="Username" required="" autofocus="">
-  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required="" autofocus="">
-  <button name="Submit" class="button" [class.button-unready]="!readyToSend()" [disabled]="!readyToSend()" value="Login" (click)="login()">Вход</button>
+<div class="wrapper form-login">
+  <div class="wrapper l-form">
+    <div class="form-wrapper">
+      <input class="form-input" type="text" [(ngModel)]="user.username" name="username" placeholder="Username" required="" autofocus="">
+    </div>
+  </div>
+  <div class="wrapper l-form">
+    <div class="form-wrapper">
+      <input class="form-input" type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required="" autofocus="">
+    </div>
+  </div>
+  <div class="wrapper l-button">
+    <div class="form-wrapper">
+      <button name="Submit" class="form-input button login-button" [class.button-unready]="!readyToSend()" [disabled]="!readyToSend()" value="Login" (click)="login()">Вход</button>>
+    </div>
+  </div>
 </div>
-</body>

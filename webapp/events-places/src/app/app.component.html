@@ -1,40 +1,38 @@
-<div class="header-field">
-  <div class="log-reg" [class.hidden]="!cookieSet()">
-    <div class="login-field">
-      <app-login></app-login>
+<div class="wrapper main-wrapper">
+  <div class="wrapper header-wrapper">
+    <div class="wrapper name-wrapper">
+      <h1 class="title">Title</h1>
     </div>
-    <button name="Submit" class="reg-button" value="Register" (click)="toRegister()">Регистрация</button>
-  </div>
-  <div class="home" [class.hidden]="cookieSet()">
-    <div class="field-text">Ass</div>
-  </div>
-</div>
-<div [class.hidden]="hideChoice()">
-  <div class="content-field">
-    <div class="left-field" (click)="setState('events')">
-      <div class="field-text">Events</div>
-    </div>
-    <div class="right-field" (click)="setState('places')">
-      <div class="field-text">Places</div>
-    </div>
-  </div>
-</div>
-<div [class.hidden]="!hideChoice()">
-  <div class="choice-field">
-    <div class="left-field" [class.ev-chosen]="state=='events'" (click)="setState('events')">
-      <div class="field-text">Events</div>
-    </div>
-    <div class="right-field" [class.pl-chosen]="state=='places'" (click)="setState('places')">
-      <div class="field-text">Places</div>
+    <div class="wrapper acc-wrapper">
+      <div class="acc-forms" [class.hidden]="!cookieNotSet()">
+        <div class="wrapper login-wrapper">
+          <app-login></app-login>
+        </div>
+        <div class="wrapper register-wrapper">
+          <div class="form-wrapper">
+           <button name="Submit" class="reg-button" value="Register" (click)="toRegister()">Регистрация</button>
+          </div>
+       </div>
+      </div>
+      <div class="acc-home" [class.hidden]="cookieNotSet()">
+        <div class="wrapper username-wrapper">
+          <h2 class="username">Добро пожаловать, {{currentUser}}</h2>
+        </div>
+        <div class="wrapper logout-wrapper">
+          <div class="form-wrapper">
+           <button name="Submit" class="form-input button logout-button" value="Logout" (click)="logout()">Выход</button>>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="var-field">
-    <div class="filter-field">
-      <div class="field-text">Future filters</div>
-    </div>
-    <div class="v-field">
-      <div class="field-text">{{state}}</div>
-    </div>
+  <div class="wrapper choice-wrapper">
+    <div class="wrapper events-choice"></div>
+    <div class="wrapper places-choice"></div>
+  </div>
+  <div class="wrapper content-wrapper">
+    <div class="wrapper filter-wrapper"></div>
+    <div class="wrapper item-wrapper"></div>
   </div>
 </div>
 

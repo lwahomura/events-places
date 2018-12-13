@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../datamodels/user";
+import {COMMON_ADDRESS} from "../datamodels/common_address";
 
 @Component({
   selector: 'app-login',
@@ -25,12 +26,11 @@ export class LoginComponent {
     const params = new URLSearchParams();
     params.set('username', this.user.username);
     params.set('password', this.user.password);
-    console.log(this.user);
-
-    this.http.post(this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+    this.user.username = '';
+    this.user.password = '';
+    this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         this.setCookie("f_c", data['response']['cookie']);
-        this.router.navigate(['/app'])
       } else {
         const s = document.createElement('script');
         s.type = 'text/javascript';
@@ -43,7 +43,6 @@ export class LoginComponent {
   setCookie(name: string, val: string) {
     const date = new Date();
     const value = val;
-
     date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
     document.cookie = name + "=" + value + "; expires =" + date.toUTCString() + "; path=/"
   }

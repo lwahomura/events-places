@@ -1,97 +1,132 @@
-$leftcolor: lightpink;
-$rightcolor: lightblue;
-
-.header-field {
-  top: 0;
-  position: fixed;
-  height: 10%;
+.main-wrapper {
   width: 100%;
-  left: 0;
-  background-color: lightgoldenrodyellow;
-}
-
-.login-field {
-  left: 0;
-}
-
-.filter-field {
-  width: 20%;
-  background-color: lightgray;
   height: 100%;
-  position: fixed;
-}
 
-.v-field {
-  width: 80%;
-  left: 20%;
-  background-color: lightgreen;
-  height: 100%;
-  position: fixed;
-}
 
-.content-field {
-  height: 90%;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
+  .header-wrapper {
+    height: 10%;
+    width: 100%;
 
-.choice-field {
-  height: 10%;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 80%;
-}
+    .name-wrapper {
+      height: 100%;
+      width: 30%;
 
-.var-field {
-  height: 80%;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-}
+      .title {
+        height: 100%;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
+      }
+    }
 
-.left-field, .right-field {
-  height: 100%;
-  width: 50%;
-}
+    .acc-wrapper {
+      height: 100%;
+      width: 70%;
 
-.left-field {
-  float: left;
-  background-color: $leftcolor;
-}
+      .acc-forms {
+        height: 100%;
+        width: 100%;
 
-.left-field:hover {
-  background-color: darken($leftcolor, 50%);
-  cursor: pointer;
-}
+        .login-wrapper {
+          height: 50%;
+          width: 100%;
+        }
 
-.ev-chosen {
-  background-color: darken($leftcolor, 50%);
-}
+        .register-wrapper {
+          height: 50%;
+          width: 100%;
+          position: relative;
 
-.right-field {
-  float: right;
-  background-color: $rightcolor;
-}
+          .form-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20%;
+            right: 0;
+            text-align: center;
 
-.right-field:hover {
-  background-color: darken($rightcolor, 50%);
-  cursor: pointer;
-}
+            .reg-button {
+              width: 90%;
+            }
+          }
+        }
+      }
 
-.pl-chosen {
-  background-color: darken($rightcolor, 50%);
-}
+      .acc-home {
+        height: 100%;
+        width: 100%;
 
-.field-text {
-  left: 50%;
-  top: 50%;
-  position: relative;
-}
+        .username-wrapper {
+          width: 80%;
+          height: 100%;
 
-.hidden {
-  display: none;
+          .username {
+            height: 100%;
+            width: 100%;
+            font-size: 25px;
+            text-align: center;
+            font-style: italic;
+          }
+        }
+
+        .logout-wrapper {
+          width: 20%;
+          height: 100%;
+          position: relative;
+
+          .form-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            text-align: center;
+
+            .form-input {
+              width: 90%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .choice-wrapper {
+    height: 20%;
+    width: 100%;
+
+
+    .events-choice {
+      height: 100%;
+      width: 50%;
+      background-color: yellow;
+    }
+
+    .places-choice {
+      height: 100%;
+      width: 50%;
+      background-color: green;
+    }
+  }
+
+  .choice-wrapper-big {
+    height: 90% !important;
+  }
+
+  .content-wrapper {
+    height: 70%;
+    width: 100%;
+
+
+    .filter-wrapper {
+      height: 100%;
+      width: 20%;
+      background-color: blue;
+    }
+
+    .item-wrapper {
+      height: 100%;
+      width: 80%;
+      background-color: purple;
+    }
+  }
 }

@@ -7,3 +7,22 @@ button {
 .button-unready {
   cursor: default;
 }
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0 0 0 0;
+}
+
+.wrapper {
+  display: inline-block;
+  font-size: 0;
+  float: left;
+}
+
+.hidden {
+  display: none;
+}

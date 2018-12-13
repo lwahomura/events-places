@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, DoCheck} from '@angular/core';
 import {Router} from "@angular/router";
 import {isNull} from "util";
 
@@ -7,14 +7,35 @@ import {isNull} from "util";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
   state = '';
+  currentUser = '';
   constructor(private router: Router) {
 
   }
 
+  ngDoCheck() {
+    if (!this.cookieNotSet()) {
+      const cookie = (atob((this.getCookie("f_c"))));
+      this.currentUser = cookie.slice(1);
+    }
+  }
+
   toRegister() {
     this.router.navigate(['app/register']);
+  }
+
+  logout() {
+    this.deleteCookie("f_c");
+  }
+
+  deleteCookie(name: string) {
+    const date = new Date();
+    // Set it expire in -1 days
+    date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
+
+    // Set it
+    document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
   }
 
   setState(st: string) {
@@ -25,7 +46,7 @@ export class AppComponent {
     return this.state.length !== 0 ;
   }
 
-  cookieSet() {
+  cookieNotSet() {
     return isNull(this.getCookie("f_c"));
   }
 

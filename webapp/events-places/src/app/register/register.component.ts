@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../datamodels/user";
+import {COMMON_ADDRESS} from "../datamodels/common_address";
 
 @Component({
   selector: 'app-register',
@@ -28,8 +29,17 @@ export class RegisterComponent {
     const params = new URLSearchParams();
     params.set('username', this.user.username);
     params.set('password', this.user.password);
+    let nType = '';
+    if (this.user.a_t === "организатор") {
+      nType = '0';
+    }
+    if (this.user.a_t === "арнендодатель") {
+      nType = '1';
+    }
+    params.set('type', nType);
 
-    this.http.post(this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+    console.log(params);
+    this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         this.setCookie("f_c", data['response']['cookie']);
         this.router.navigate(['/app'])

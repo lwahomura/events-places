@@ -9,6 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from "./register/register.component";
 import {CookieService} from "angular2-cookie/core";
 import {FormsModule} from "@angular/forms";
+import {PlaceComponent} from "./place/place.component";
+import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import {FormsModule} from "@angular/forms";
     RouterComponent,
     LoginComponent,
     RegisterComponent,
+    PlaceComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    PerfectScrollbarModule
   ],
   providers: [],
   bootstrap: [RouterComponent]
