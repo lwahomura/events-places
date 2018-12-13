@@ -1,3 +1,5 @@
+$choicecolor: white;
+
 .main-wrapper {
   width: 100%;
   height: 100%;
@@ -91,20 +93,41 @@
   }
 
   .choice-wrapper {
-    height: 20%;
+    height: 10%;
     width: 100%;
+    cursor: pointer;
+    position: relative;
 
 
     .events-choice {
       height: 100%;
       width: 50%;
-      background-color: yellow;
+      background-color: $choicecolor;
+    }
+
+    .hoverable:hover {
+      background-color: darken($choicecolor, 20%);
     }
 
     .places-choice {
       height: 100%;
       width: 50%;
-      background-color: green;
+      background-color: $choicecolor;
+    }
+
+    .choice-wrapper {
+      position: absolute;
+      top: 30%;
+      transform: translateY(-50%);
+      width: 50%;
+      text-align: center;
+
+      .choice-text {
+        height: 100%;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
+      }
     }
   }
 
@@ -113,20 +136,22 @@
   }
 
   .content-wrapper {
-    height: 70%;
+    height: 80%;
     width: 100%;
-
 
     .filter-wrapper {
       height: 100%;
       width: 20%;
-      background-color: blue;
     }
 
     .item-wrapper {
       height: 100%;
       width: 80%;
-      background-color: purple;
+
+      .item {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 }

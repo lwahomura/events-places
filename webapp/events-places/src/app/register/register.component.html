@@ -1,5 +1,4 @@
-<body>
-<div class = "form-register">
+<div class="form-register">
   <input type="text" [(ngModel)]="user.username"  name="username" required="" placeholder="Username" #name="ngModel">
   <input type="password" [(ngModel)]="user.password"  name="password" required="" placeholder="Password" #name="ngModel">
   <select class="form-control" [(ngModel)]="user.a_t"  id="acc_type">
@@ -7,4 +6,3 @@
   </select>
   <button name="Submit" class="button" [class.button-unready]="!readyToSend()" [disabled]="!readyToSend()" value="Register" (click)="register()">Регистрация</button>
 </div>
-</body>

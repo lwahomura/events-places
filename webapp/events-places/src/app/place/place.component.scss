@@ -1,0 +1,43 @@
+.places-wrapper {
+  height: 100%;
+  width: 100%;
+
+  .place-content-wrapper {
+    height: 90%;
+    width: 90%;
+  }
+
+  .controls-wrapper {
+    height: 90%;
+    width: 10%;
+
+    .option {
+      width: 100%;
+    }
+
+    .option:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+
+  .paginate-controls-wrapper {
+    height: 10%;
+    width: 100%;
+    position: relative;
+
+    .controls-wrapper {
+      position: absolute;
+      height: 100%;
+      width: 30%;
+      left: 35%;
+
+      .control {
+        width: calc(100% / 3);
+        height: 100%;
+      }
+    }
+  }
+}

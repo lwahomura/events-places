@@ -26,13 +26,26 @@
       </div>
     </div>
   </div>
-  <div class="wrapper choice-wrapper">
-    <div class="wrapper events-choice"></div>
-    <div class="wrapper places-choice"></div>
+  <div class="wrapper choice-wrapper" [class.choice-wrapper-big]="state==''">
+    <div class="wrapper events-choice hoverable" (click)="setState('events')">
+      <div class="choice-wrapper">
+        <h2 class="choice-text">Мероприятия</h2>
+      </div>
+    </div>
+    <div class="wrapper places-choice hoverable" (click)="setState('places')">
+      <div class="choice-wrapper">
+        <h2 class="choice-text">Помещения</h2>
+      </div>
+    </div>
   </div>
-  <div class="wrapper content-wrapper">
+  <div class="wrapper content-wrapper" [class.hidden]="state==''">
     <div class="wrapper filter-wrapper"></div>
-    <div class="wrapper item-wrapper"></div>
+    <div class="wrapper item-wrapper">
+      <div class="wrapper item" [class.hidden]="state!='events'"></div>
+      <div class="wrapper item" [class.hidden]="state!='places'">
+        <app-place></app-place>
+      </div>
+    </div>
   </div>
 </div>
 

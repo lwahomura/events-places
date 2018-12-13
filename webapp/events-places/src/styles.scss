@@ -21,6 +21,10 @@ body {
   display: inline-block;
   font-size: 0;
   float: left;
+
+  -webkit-box-shadow:inset 0px 0px 0px 1px grey;
+  -moz-box-shadow:inset 0px 0px 0px 1px grey;
+  box-shadow:inset 0px 0px 0px 1px grey;
 }
 
 .hidden {

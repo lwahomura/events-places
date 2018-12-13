@@ -12,6 +12,7 @@ import {HttpClient} from "@angular/common/http";
 export class PlaceComponent implements OnInit {
   public places: Place[];
   public filtredPlaces: Place[];
+  public currentPlace: Place;
   private baseUrl = "/api/places";
 
   constructor(private http: HttpClient) {

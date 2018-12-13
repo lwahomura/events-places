@@ -33,7 +33,7 @@ export class RegisterComponent {
     if (this.user.a_t === "организатор") {
       nType = '0';
     }
-    if (this.user.a_t === "арнендодатель") {
+    if (this.user.a_t === "арендодатель") {
       nType = '1';
     }
     params.set('type', nType);
