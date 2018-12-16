@@ -14,8 +14,6 @@ $choicecolor: white;
       width: 30%;
 
       .title {
-        height: 100%;
-        width: 100%;
         font-size: 30px;
         text-align: center;
       }
@@ -78,7 +76,7 @@ $choicecolor: white;
 
           .form-wrapper {
             position: absolute;
-            top: 50%;
+            top: 40%;
             transform: translateY(-50%);
             width: 100%;
             text-align: center;
@@ -123,8 +121,6 @@ $choicecolor: white;
       text-align: center;
 
       .choice-text {
-        height: 100%;
-        width: 100%;
         font-size: 30px;
         text-align: center;
       }
@@ -139,14 +135,9 @@ $choicecolor: white;
     height: 80%;
     width: 100%;
 
-    .filter-wrapper {
-      height: 100%;
-      width: 20%;
-    }
-
     .item-wrapper {
       height: 100%;
-      width: 80%;
+      width: 100%;
 
       .item {
         height: 100%;

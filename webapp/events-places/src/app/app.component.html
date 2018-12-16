@@ -1,9 +1,9 @@
 <div class="wrapper main-wrapper">
-  <div class="wrapper header-wrapper">
+  <div class="bordered-wrapper header-wrapper">
     <div class="wrapper name-wrapper">
-      <h1 class="title">Title</h1>
+      <h1 class="title">Events n' Places</h1>
     </div>
-    <div class="wrapper acc-wrapper">
+    <div class="bordered-wrapper acc-wrapper">
       <div class="acc-forms" [class.hidden]="!cookieNotSet()">
         <div class="wrapper login-wrapper">
           <app-login></app-login>
@@ -26,20 +26,19 @@
       </div>
     </div>
   </div>
-  <div class="wrapper choice-wrapper" [class.choice-wrapper-big]="state==''">
-    <div class="wrapper events-choice hoverable" (click)="setState('events')">
+  <div class="bordered-wrapper choice-wrapper" [class.choice-wrapper-big]="state==''">
+    <div class="bordered-wrapper events-choice hoverable" (click)="setState('events')">
       <div class="choice-wrapper">
         <h2 class="choice-text">Мероприятия</h2>
       </div>
     </div>
-    <div class="wrapper places-choice hoverable" (click)="setState('places')">
+    <div class="bordered-wrapper places-choice hoverable" (click)="setState('places')">
       <div class="choice-wrapper">
         <h2 class="choice-text">Помещения</h2>
       </div>
     </div>
   </div>
-  <div class="wrapper content-wrapper" [class.hidden]="state==''">
-    <div class="wrapper filter-wrapper"></div>
+  <div class="bordered-wrapper content-wrapper" [class.hidden]="state==''">
     <div class="wrapper item-wrapper">
       <div class="wrapper item" [class.hidden]="state!='events'"></div>
       <div class="wrapper item" [class.hidden]="state!='places'">

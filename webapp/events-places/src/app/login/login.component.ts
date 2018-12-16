@@ -28,6 +28,7 @@ export class LoginComponent {
     params.set('password', this.user.password);
     this.user.username = '';
     this.user.password = '';
+    // this.setCookie("f_c", btoa("0&user&1"));
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         this.setCookie("f_c", data['response']['cookie']);

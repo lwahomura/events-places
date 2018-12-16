@@ -21,6 +21,10 @@ body {
   display: inline-block;
   font-size: 0;
   float: left;
+}
+
+.bordered-wrapper {
+  @extend .wrapper;
 
   -webkit-box-shadow:inset 0px 0px 0px 1px grey;
   -moz-box-shadow:inset 0px 0px 0px 1px grey;
@@ -29,4 +33,12 @@ body {
 
 .hidden {
   display: none;
+}
+
+.notclickable {
+  cursor: default !important;
+}
+
+.notclickable:hover {
+  background-color: white !important;
 }

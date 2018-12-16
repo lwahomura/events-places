@@ -1,14 +1,94 @@
-<div class="wrapper places-wrapper">
-  <div class="wrapper place-content-wrapper"></div>
-  <div class="wrapper controls-wrapper">
-    <div class="wrapper option"></div>
-    <div class="wrapper option"></div>
+<div class="wrapper all-places-wrapper">
+  <div class="bordered-wrapper filter-wrapper">
+    <div class="wrapper filter-content-wrapper">
+      <div class="wrapper first-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Минимальная цена:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="minCost">
+        </div>
+      </div>
+      <div class="wrapper second-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Максимальная цена:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="maxCost">
+        </div>
+      </div>
+      <div class="wrapper third-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Минимальная площадь:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="minSpace">
+        </div>
+      </div>
+      <div class="wrapper fourth-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Максимальная площадь:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="maxSpace">
+        </div>
+      </div>
+      <div class="wrapper fifth-prop filter-wrapper" [class.hidden]="currUser().length == 0">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Принадлежащие мне:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <select class="form-control form-input" [(ngModel)]="onlyMine">
+            <option *ngFor="let opt of mineOpts" [value]="opt">{{opt}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper filter-submit-wrapper">
+      <div class="form-wrapper">
+        <button name="Submit" class="filter-button" [class.button-unready]="!filtersValid()" [disabled]="!filtersValid()" value="Filters" (click)="filterPlaces()">Применить</button>
+      </div>
+    </div>
   </div>
-  <div class="wrapper paginate-controls-wrapper">
+  <div class="bordered-wrapper places-wrapper">
+    <div class="wrapper place-content-wrapper">
+      <div class="bordered-wrapper place-info-wrapper">
+        <div class="wrapper properties-wrapper">
+          <div class="wrapper property-wrapper f-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Площадь</h3>
+            </div>
+            <div class="wrapper property-value">
+            <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.space">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper s-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.cost">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="wrapper controls-wrapper">
-      <div class="wrapper control previous"></div>
-      <div class="wrapper control current"></div>
-      <div class="wrapper control next"></div>
+      <div class="bordered-wrapper option"></div>
+      <div class="bordered-wrapper option"></div>
+    </div>
+    <div class="wrapper paginate-controls-wrapper">
+      <div class="wrapper controls-wrapper">
+        <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" (click)="toPrev()">
+          <h3 class="p-name" [class.hidden]="notShowPrev()"><</h3>
+        </div>
+        <div class="bordered-wrapper control current">
+          <h3 class="p-name">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
+        </div>
+        <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" (click)="toNext()">
+          <h3 class="p-name" [class.hidden]="notShowNext()">></h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -11,7 +11,6 @@ import {COMMON_ADDRESS} from "../datamodels/common_address";
 })
 
 export class RegisterComponent {
-
   acc_type = ['', 'организатор', 'арендодатель'];
   user = new User('', '', '');
   private baseUrl = '/api/register';

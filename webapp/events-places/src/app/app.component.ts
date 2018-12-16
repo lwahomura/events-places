@@ -16,8 +16,14 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck() {
     if (!this.cookieNotSet()) {
-      const cookie = (atob((this.getCookie("f_c"))));
-      this.currentUser = cookie.slice(1);
+      const cookie = (this.getCookie("f_c"));
+      if (!isNull(cookie)) {
+        const decoded = (atob(cookie));
+        const parts = decoded.split("&", -1);
+        if (parts.length === 3) {
+          this.currentUser = parts[1];
+        }
+      }
     }
   }
 
