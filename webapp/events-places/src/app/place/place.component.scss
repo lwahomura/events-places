@@ -158,6 +158,10 @@ $choicecolor: white;
           .third-prop {
             top: 50%;
           }
+
+          .fourth-prop {
+            top: 70%;
+          }
         }
       }
     }
@@ -169,12 +173,23 @@ $choicecolor: white;
 
       .option {
         width: 100%;
+        height: 10%;
+
+        .button-text {
+          height: 100%;
+          width: 100%;
+          position: relative;
+
+          .square-button {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
 
-      .option:after {
-        content: "";
-        display: block;
-        padding-bottom: 100%;
+      .hoverable:hover {
+        background-color: darken($choicecolor, 20%);
+        cursor: pointer;
       }
     }
 
@@ -210,5 +225,20 @@ $choicecolor: white;
       }
     }
   }
+}
 
+.creationActive{
+  pointer-events: all !important;
+}
+
+.creation-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+.shadowed {
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.1;
 }

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {isNull} from "util";
 import {Register} from "ts-node";
 import {RegisterComponent} from "./register/register.component";
+import {PlaceComponent} from "./place/place.component";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements DoCheck {
   currentUser = '';
 
   @ViewChild(RegisterComponent) regComp: RegisterComponent;
+  @ViewChild(PlaceComponent) placeComp: PlaceComponent;
 
   constructor() {}
 
@@ -37,6 +39,7 @@ export class AppComponent implements DoCheck {
   }
 
   logout() {
+    window.location.reload();
     this.deleteCookie("f_c");
   }
 

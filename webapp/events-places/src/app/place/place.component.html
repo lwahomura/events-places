@@ -1,5 +1,5 @@
 <div class="wrapper all-places-wrapper">
-  <div class="bordered-wrapper filter-wrapper">
+  <div class="bordered-wrapper filter-wrapper" [class.shadowed]="openCP">
     <div class="wrapper filter-content-wrapper">
       <div class="wrapper first-prop filter-wrapper">
         <div class="wrapper filter-name">
@@ -51,50 +51,128 @@
     </div>
   </div>
   <div class="bordered-wrapper places-wrapper">
-    <div class="wrapper place-content-wrapper">
+    <div class="wrapper place-content-wrapper" [class.hidden]="openCP">
       <div class="bordered-wrapper place-info-wrapper">
         <div class="wrapper properties-wrapper">
           <div class="wrapper property-wrapper first-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Площадь</h3>
+              <h3 class="p-name">Название</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.square">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.room_name">
             </div>
           </div>
           <div class="wrapper property-wrapper second-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Цена</h3>
+              <h3 class="p-name">Площадь</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.costs">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.square">
             </div>
           </div>
           <div class="wrapper property-wrapper third-prop">
             <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.costs">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper fourth-prop">
+            <div class="wrapper property-name">
               <h3 class="p-name">Местоположение</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.address">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.address">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="wrapper controls-wrapper">
-      <div class="bordered-wrapper option"></div>
-      <div class="bordered-wrapper option"></div>
+
+    <div class="wrapper place-content-wrapper" [class.hidden]="!openCP">
+      <div class="bordered-wrapper place-info-wrapper">
+        <div class="wrapper properties-wrapper">
+          <div class="wrapper property-wrapper first-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Название</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.room_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper second-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Площадь</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.square">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.costs">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper fourth-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Местоположение</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.address">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="wrapper controls-wrapper">
+      <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressCreate()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" value="Создать" (click)="create()">Добавить</button>
+        </div>
+      </div>
+      <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createPlace()">Создать</button>
+        </div>
+      </div>
+      <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>
+        </div>
+      </div>
+
+      <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressUpdate()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
+        </div>
+      </div>
+      <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>
+        </div>
+      </div>
+      <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
+        <div class="wrapper button-text">
+          <button name="Submit" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper paginate-controls-wrapper">
       <div class="wrapper controls-wrapper">
         <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" (click)="toPrev()">
-          <h3 class="p-name" [class.hidden]="notShowPrev()"><</h3>
+          <h3 class="p-name" [class.hidden]="notShowPrev()" [class.shadowed]="openCP"><</h3>
         </div>
         <div class="bordered-wrapper control current">
-          <h3 class="p-name">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
+          <h3 class="p-name" [class.shadowed]="openCP">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
         </div>
         <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" (click)="toNext()">
-          <h3 class="p-name" [class.hidden]="notShowNext()">></h3>
+          <h3 class="p-name" [class.hidden]="notShowNext()" [class.shadowed]="openCP">></h3>
         </div>
       </div>
     </div>
