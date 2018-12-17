@@ -1,6 +1,8 @@
-import {Component, DoCheck} from '@angular/core';
+import {Component, DoCheck, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {isNull} from "util";
+import {Register} from "ts-node";
+import {RegisterComponent} from "./register/register.component";
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,13 @@ import {isNull} from "util";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements DoCheck {
+  public regState: boolean;
   state = '';
   currentUser = '';
-  constructor(private router: Router) {
 
-  }
+  @ViewChild(RegisterComponent) regComp: RegisterComponent;
+
+  constructor() {}
 
   ngDoCheck() {
     if (!this.cookieNotSet()) {
@@ -20,7 +24,7 @@ export class AppComponent implements DoCheck {
       if (!isNull(cookie)) {
         const decoded = (atob(cookie));
         const parts = decoded.split("&", -1);
-        if (parts.length === 3) {
+        if (parts.length === 2) {
           this.currentUser = parts[1];
         }
       }
@@ -28,7 +32,8 @@ export class AppComponent implements DoCheck {
   }
 
   toRegister() {
-    this.router.navigate(['app/register']);
+    this.regComp.open = true
+    // this.router.navigate(['app/register']);
   }
 
   logout() {

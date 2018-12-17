@@ -100,7 +100,6 @@ $choicecolor: white;
     .events-choice {
       height: 100%;
       width: 50%;
-      background-color: $choicecolor;
     }
 
     .hoverable:hover {
@@ -110,7 +109,6 @@ $choicecolor: white;
     .places-choice {
       height: 100%;
       width: 50%;
-      background-color: $choicecolor;
     }
 
     .choice-wrapper {
@@ -145,4 +143,15 @@ $choicecolor: white;
       }
     }
   }
+}
+
+.reg-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.shadowed {
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.1;
 }

@@ -1,8 +1,64 @@
-<div class="form-register">
-  <input type="text" [(ngModel)]="user.username"  name="username" required="" placeholder="Username" #name="ngModel">
-  <input type="password" [(ngModel)]="user.password"  name="password" required="" placeholder="Password" #name="ngModel">
-  <select class="form-control" [(ngModel)]="user.a_t"  id="acc_type">
-    <option *ngFor="let a_t of acc_type" [value]="a_t">{{a_t}}</option>
-  </select>
-  <button name="Submit" class="button" [class.button-unready]="!readyToSend()" [disabled]="!readyToSend()" value="Register" (click)="register()">Регистрация</button>
+<div class="wrapper form-register">
+  <div class="wrapper false-register-wrapper">
+    <div class="bordered-wrapper register-wrapper">
+      <div class="wrapper forms-wrapper">
+        <div class="wrapper form-wrapper first-form">
+          <div class="wrapper form-name">
+            <h3 class="f-name">Логин</h3>
+          </div>
+          <div class="wrapper form-value">
+            <input class="form-input" type="text" [(ngModel)]="user.username" required="" placeholder="login">
+          </div>
+        </div>
+        <div class="wrapper form-wrapper second-form">
+          <div class="wrapper form-name">
+            <h3 class="f-name">Пароль</h3>
+          </div>
+          <div class="wrapper form-value">
+            <input class="form-input" type="password" [(ngModel)]="user.password" required="" placeholder="password">
+          </div>
+        </div>
+        <div class="wrapper form-wrapper third-form">
+          <div class="wrapper form-name">
+            <h3 class="f-name">Тип аккаунта</h3>
+          </div>
+          <div class="wrapper form-value">
+            <select class="form-input choice-form" [(ngModel)]="user.a_t">
+              <option *ngFor="let a_t of acc_type" [value]="a_t">{{a_t}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="wrapper form-wrapper fourth-form">
+          <div class="wrapper form-name">
+            <h3 class="f-name">ФИО</h3>
+          </div>
+          <div class="wrapper form-value">
+            <input class="form-input" type="text" [(ngModel)]="user.name" required="" placeholder="Иванов Иван Иванович">
+          </div>
+        </div>
+        <div class="wrapper form-wrapper fifth-form">
+          <div class="wrapper form-name">
+            <h3 class="f-name">Адрес почты</h3>
+          </div>
+          <div class="wrapper form-value">
+            <input class="form-input" type="text" [(ngModel)]="user.email" required="" placeholder="example@mail.ru">
+          </div>
+        </div>
+      </div>
+      <div class="wrapper buttons-wrapper">
+        <div class="wrapper choice-wrapper">
+          <div class="wrapper choice back">
+            <div class="form-wrapper">
+              <button name="Back" class="button" value="Register" (click)="back()">Отмена</button>
+            </div>
+          </div>
+          <div class="wrapper choice register">
+            <div class="form-wrapper">
+              <button name="Submit" class="button" [class.button-unready]="!readyToSend()" [disabled]="!readyToSend()" value="Register" (click)="register()">Регистрация</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

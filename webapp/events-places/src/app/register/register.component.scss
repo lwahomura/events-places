@@ -1,0 +1,118 @@
+.form-register {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+
+  .false-register-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    .register-wrapper {
+      background-color: white;
+      height: 70%;
+      width: 70%;
+      position: absolute;
+      top: 50%;
+      left: 15%;
+      transform: translateY(-50%);
+
+      .forms-wrapper {
+        height: 80%;
+        width: 100%;
+        position: relative;
+
+        .form-wrapper {
+          left: 10%;
+          width: 80%;
+          height: 10%;
+          position: absolute;
+
+          .form-name {
+            width: 30%;
+            height: 100%;
+
+            .f-name {
+              height: 100%;
+              width: 100%;
+              font-size: 23px;
+              text-align: center;
+            }
+          }
+
+          .form-value {
+            top: 10%;
+            width: 70%;
+            height: 100%;
+            text-align: center;
+            position: relative;
+
+            .form-input {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 80%;
+              left: 10%;
+            }
+          }
+
+          .choice-form {
+            width: 83% !important;
+          }
+        }
+
+        .first-form {
+          top: 5%;
+        }
+
+        .second-form {
+          top: 15%;
+        }
+
+        .third-form {
+          top: 25%;
+        }
+
+        .fourth-form {
+          top: 35%;
+        }
+
+        .fifth-form {
+          top: 45%;
+        }
+      }
+
+      .buttons-wrapper {
+        height: 20%;
+        width: 100%;
+        position: relative;
+
+        .choice-wrapper {
+          position: absolute;
+          left: 15%;
+          height: 100%;
+          width: 70%;
+
+          .choice {
+            width: 50%;
+            height: 100%;
+            position: relative;
+
+            .form-wrapper {
+              position: absolute;
+              top: 40%;
+              transform: translateY(-50%);
+              width: 100%;
+              text-align: center;
+
+              .button {
+                width: 80%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

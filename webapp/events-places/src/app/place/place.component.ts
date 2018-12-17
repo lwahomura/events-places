@@ -41,8 +41,8 @@ export class PlaceComponent implements OnInit {
         }
       }
     });
-    // this.places.push({id:1, date: "", cost: 10, space:20, host:0, event:0, free:true});
-    // this.places.push({id:2, date: "", cost: 13, space:22, host:1, event:0, free:true});
+    // this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1"});
+    // this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2"});
 
     this.filterPlaces();
 
@@ -50,7 +50,8 @@ export class PlaceComponent implements OnInit {
       this.currentId = 0;
       this.currentPlace = this.filtredPlaces[this.currentId];
     } else {
-      this.currentPlace = new Place({id:-1, date: "", cost: "", space:"", host:0, event:0, free:true})
+      this.currentId = -1;
+      this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
     }
   }
 
@@ -75,11 +76,11 @@ export class PlaceComponent implements OnInit {
   filterPlaces() {
     this.filtredPlaces.length = 0;
     for (const item of this.places) {
-      if (((this.onlyMine && item.host.toString() === this.currUser()) || !this.onlyMine) &&
-        ((this.minCost == 0 ) || item.cost >= this.minCost) &&
-        ((this.maxCost == Infinity ) || item.cost <= this.maxCost) &&
-        ((this.minSpace == 0 ) || item.space >= this.minSpace) &&
-        ((this.maxSpace == Infinity ) || item.space <= this.maxSpace)
+      if (((this.onlyMine && item.landlord === this.currUser()) || !this.onlyMine) &&
+        ((this.minCost == 0 ) || item.costs >= this.minCost) &&
+        ((this.maxCost == Infinity ) || item.costs <= this.maxCost) &&
+        ((this.minSpace == 0 ) || item.square >= this.minSpace) &&
+        ((this.maxSpace == Infinity ) || item.square <= this.maxSpace)
       ){
         this.filtredPlaces.push(item);
       }
@@ -96,8 +97,8 @@ export class PlaceComponent implements OnInit {
       console.log(1);
       const decoded = (atob(cookie));
       const parts = decoded.split("&", -1);
-      if (parts.length === 3) {
-        return parts[2];
+      if (parts.length === 2) {
+        return parts[1];
       }
     }
     return ""

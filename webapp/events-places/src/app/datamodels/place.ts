@@ -1,20 +1,17 @@
 export class Place {
 
   constructor(jsonData) {
-    this.id = jsonData.id;
-    this.date = jsonData.date;
-    this.cost = jsonData.cost;
-    this.space = jsonData.space;
-    this.host = jsonData.host;
-    this.event = jsonData.event;
-    this.free = jsonData.free;
+    this.square = jsonData.square;
+    this.costs = jsonData.costs;
+    this.address = jsonData.address;
+    this.landlord = jsonData.landlord;
+    this.room_name = jsonData.room_name;
+
   }
 
-  public id: number;
-  public date: string;
-  public cost: number;
-  public space: number;
-  public host: number;
-  public event: number;
-  public free: boolean;
+  public square: number;
+  public costs: number;
+  public address: string;
+  public landlord: string;
+  public room_name: string;
 }

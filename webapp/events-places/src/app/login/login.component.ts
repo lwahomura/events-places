@@ -11,7 +11,7 @@ import {COMMON_ADDRESS} from "../datamodels/common_address";
 })
 
 export class LoginComponent {
-  user = new User('', '', '');
+  user = new User('', '', '', '', '');
   private baseUrl = '/api/login';
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
   constructor(private http: HttpClient, private router: Router) {
@@ -28,7 +28,7 @@ export class LoginComponent {
     params.set('password', this.user.password);
     this.user.username = '';
     this.user.password = '';
-    // this.setCookie("f_c", btoa("0&user&1"));
+    this.setCookie("f_c", btoa("0&user"));
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         this.setCookie("f_c", data['response']['cookie']);

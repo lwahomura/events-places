@@ -54,20 +54,28 @@
     <div class="wrapper place-content-wrapper">
       <div class="bordered-wrapper place-info-wrapper">
         <div class="wrapper properties-wrapper">
-          <div class="wrapper property-wrapper f-prop">
+          <div class="wrapper property-wrapper first-prop">
             <div class="wrapper property-name">
               <h3 class="p-name">Площадь</h3>
             </div>
             <div class="wrapper property-value">
-            <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.space">
+              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.square">
             </div>
           </div>
-          <div class="wrapper property-wrapper s-prop">
+          <div class="wrapper property-wrapper second-prop">
             <div class="wrapper property-name">
               <h3 class="p-name">Цена</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.cost">
+              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.costs">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Местоположение</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" disabled="" placeholder="" [value]="currentPlace.address">
             </div>
           </div>
         </div>

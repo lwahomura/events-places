@@ -11,8 +11,9 @@ import {COMMON_ADDRESS} from "../datamodels/common_address";
 })
 
 export class RegisterComponent {
+  public open: boolean;
   acc_type = ['', 'организатор', 'арендодатель'];
-  user = new User('', '', '');
+  user = new User('', '', '', '', '');
   private baseUrl = '/api/register';
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
   constructor(private http: HttpClient, private router: Router) {
@@ -20,7 +21,8 @@ export class RegisterComponent {
   }
 
   readyToSend() {
-    return this.user.username.length !== 0 && this.user.password.length !== 0 && this.user.a_t.length !== 0;
+    return this.user.username.length !== 0 && this.user.password.length !== 0 && this.user.a_t.length !== 0 &&
+      this.user.name.length != 0 && this.user.email.length != 0
   }
 
   register(): void {
@@ -28,6 +30,8 @@ export class RegisterComponent {
     const params = new URLSearchParams();
     params.set('username', this.user.username);
     params.set('password', this.user.password);
+    params.set('name', this.user.name);
+    params.set('email', this.user.email);
     let nType = '';
     if (this.user.a_t === "организатор") {
       nType = '0';
@@ -41,7 +45,7 @@ export class RegisterComponent {
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         this.setCookie("f_c", data['response']['cookie']);
-        this.router.navigate(['/app'])
+        this.open = false
       } else {
         const s = document.createElement('script');
         s.type = 'text/javascript';
@@ -49,6 +53,11 @@ export class RegisterComponent {
         document.body.appendChild(s);
       }
     })
+  }
+
+  back() {
+    this.open = false;
+    this.user = new User('', '', '', '', '');
   }
 
   setCookie(name: string, val: string) {

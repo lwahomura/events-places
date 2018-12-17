@@ -1,4 +1,4 @@
-<div class="wrapper main-wrapper">
+<div class="wrapper main-wrapper" [class.shadowed]="regComp.open">
   <div class="bordered-wrapper header-wrapper">
     <div class="wrapper name-wrapper">
       <h1 class="title">Events n' Places</h1>
@@ -20,7 +20,7 @@
         </div>
         <div class="wrapper logout-wrapper">
           <div class="form-wrapper">
-           <button name="Submit" class="form-input button logout-button" value="Logout" (click)="logout()">Выход</button>>
+            <button name="Submit" class="form-input button logout-button" value="Logout" (click)="logout()">Выход</button>>
           </div>
         </div>
       </div>
@@ -46,5 +46,8 @@
       </div>
     </div>
   </div>
+</div>
+<div class="reg-wrapper" [class.hidden]="!regComp.open">
+  <app-register></app-register>
 </div>
 
