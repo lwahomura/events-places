@@ -40,7 +40,9 @@
   </div>
   <div class="bordered-wrapper content-wrapper" [class.hidden]="state==''">
     <div class="wrapper item-wrapper">
-      <div class="wrapper item" [class.hidden]="state!='events'"></div>
+      <div class="wrapper item" [class.hidden]="state!='events'">
+        <app-event></app-event>
+      </div>
       <div class="wrapper item" [class.hidden]="state!='places'">
         <app-place></app-place>
       </div>

@@ -1,20 +1,20 @@
 <div class="wrapper all-places-wrapper">
-  <div class="bordered-wrapper filter-wrapper" [class.shadowed]="openCP">
+  <div class="bordered-wrapper filter-wrapper" [class.shadowed]="openCP || places.length == 0">
     <div class="wrapper filter-content-wrapper">
       <div class="wrapper first-prop filter-wrapper">
         <div class="wrapper filter-name">
-          <h3 class="f-name">Минимальная цена:</h3>
+          <h3 class="f-name">Название:</h3>
         </div>
         <div class="wrapper filter-value">
-          <input class="form-input" type="text" [(ngModel)]="minCost">
+          <input class="form-input" type="text" [(ngModel)]="placeName">
         </div>
       </div>
       <div class="wrapper second-prop filter-wrapper">
         <div class="wrapper filter-name">
-          <h3 class="f-name">Максимальная цена:</h3>
+          <h3 class="f-name">Местоположение:</h3>
         </div>
         <div class="wrapper filter-value">
-          <input class="form-input" type="text" [(ngModel)]="maxCost">
+          <input class="form-input" type="text" [(ngModel)]="placeAddress">
         </div>
       </div>
       <div class="wrapper third-prop filter-wrapper">
@@ -33,7 +33,23 @@
           <input class="form-input" type="text" [(ngModel)]="maxSpace">
         </div>
       </div>
-      <div class="wrapper fifth-prop filter-wrapper" [class.hidden]="currUser().length == 0">
+      <div class="wrapper fifth-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Минимальная цена:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="minCost">
+        </div>
+      </div>
+      <div class="wrapper sixth-prop filter-wrapper">
+        <div class="wrapper filter-name">
+          <h3 class="f-name">Максимальная цена:</h3>
+        </div>
+        <div class="wrapper filter-value">
+          <input class="form-input" type="text" [(ngModel)]="maxCost">
+        </div>
+      </div>
+      <div class="wrapper seventh-prop filter-wrapper" [class.hidden]="currType() != '1'">
         <div class="wrapper filter-name">
           <h3 class="f-name">Принадлежащие мне:</h3>
         </div>
@@ -51,7 +67,7 @@
     </div>
   </div>
   <div class="bordered-wrapper places-wrapper">
-    <div class="wrapper place-content-wrapper" [class.hidden]="openCP">
+    <div class="wrapper place-content-wrapper" [class.hidden]="openCP || openUP">
       <div class="bordered-wrapper place-info-wrapper">
         <div class="wrapper properties-wrapper">
           <div class="wrapper property-wrapper first-prop">
@@ -59,31 +75,70 @@
               <h3 class="p-name">Название</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.room_name">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.room_name">
             </div>
           </div>
           <div class="wrapper property-wrapper second-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Площадь</h3>
+              <h3 class="p-name">Местоположение</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.square">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.address">
             </div>
           </div>
           <div class="wrapper property-wrapper third-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Цена</h3>
+              <h3 class="p-name">Площадь</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.costs">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.square">
             </div>
           </div>
           <div class="wrapper property-wrapper fourth-prop">
             <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.costs">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper place-content-wrapper" [class.hidden]="!openUP">
+      <div class="bordered-wrapper place-info-wrapper">
+        <div class="wrapper properties-wrapper">
+          <div class="wrapper property-wrapper first-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Название</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.room_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper second-prop">
+            <div class="wrapper property-name">
               <h3 class="p-name">Местоположение</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="currentPlace.address">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.address">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Площадь</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.square">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper fourth-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.costs">
             </div>
           </div>
         </div>
@@ -103,26 +158,26 @@
           </div>
           <div class="wrapper property-wrapper second-prop">
             <div class="wrapper property-name">
+              <h3 class="p-name">Местоположение</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.address">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
               <h3 class="p-name">Площадь</h3>
             </div>
             <div class="wrapper property-value">
               <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.square">
             </div>
           </div>
-          <div class="wrapper property-wrapper third-prop">
+          <div class="wrapper property-wrapper fourth-prop">
             <div class="wrapper property-name">
               <h3 class="p-name">Цена</h3>
             </div>
             <div class="wrapper property-value">
               <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.costs">
-            </div>
-          </div>
-          <div class="wrapper property-wrapper fourth-prop">
-            <div class="wrapper property-name">
-              <h3 class="p-name">Местоположение</h3>
-            </div>
-            <div class="wrapper property-value">
-              <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.address">
             </div>
           </div>
         </div>
@@ -132,47 +187,52 @@
     <div class="wrapper controls-wrapper">
       <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressCreate()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" value="Создать" (click)="create()">Добавить</button>
+          <button name="CreatePlace" class="filter-button square-button" value="Создать" (click)="create()">Добавить</button>
         </div>
       </div>
       <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createPlace()">Создать</button>
+          <button name="SavePlace" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createPlace()">Создать</button>
         </div>
       </div>
       <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>
+          <button name="StopCreate" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>
         </div>
       </div>
 
       <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressUpdate()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
+          <button name="UpdatePlace" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
         </div>
       </div>
       <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>
+          <button name="SaveUpdate" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>
         </div>
       </div>
       <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
         <div class="wrapper button-text">
-          <button name="Submit" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>
+          <button name="StopUpdate" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>
+        </div>
+      </div>
+      <div class="bordered-wrapper option" [class.hidden]="!canPressCreateEvent()">
+        <div class="wrapper button-text">
+          <button name="CreateEvent" class="filter-button square-button" value="Арендовать" (click)="createEvent()">Арендовать</button>
         </div>
       </div>
     </div>
 
     <div class="wrapper paginate-controls-wrapper">
       <div class="wrapper controls-wrapper">
-        <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" (click)="toPrev()">
-          <h3 class="p-name" [class.hidden]="notShowPrev()" [class.shadowed]="openCP"><</h3>
+        <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" [class.shadowed]="openCP || openUP" (click)="toPrev()">
+          <h3 class="p-name" [class.hidden]="notShowPrev()"><</h3>
         </div>
         <div class="bordered-wrapper control current">
           <h3 class="p-name" [class.shadowed]="openCP">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
         </div>
-        <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" (click)="toNext()">
-          <h3 class="p-name" [class.hidden]="notShowNext()" [class.shadowed]="openCP">></h3>
+        <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" [class.shadowed]="openCP || openUP" (click)="toNext()">
+          <h3 class="p-name" [class.hidden]="notShowNext()">></h3>
         </div>
       </div>
     </div>

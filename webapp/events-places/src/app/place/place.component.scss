@@ -50,23 +50,31 @@ $choicecolor: white;
       }
 
       .first-prop {
-        top: 5%;
+        top: 0;
       }
 
       .second-prop {
-        top: 10%;
+        top: 5%;
       }
 
       .third-prop {
-        top: 15%;
+        top: 10%;
       }
 
       .fourth-prop {
-        top: 20%;
+        top: 15%;
       }
 
       .fifth-prop {
+        top: 20%;
+      }
+
+      .sixth-prop {
         top: 25%;
+      }
+
+      .seventh-prop {
+        top: 30%;
       }
     }
 
@@ -234,11 +242,11 @@ $choicecolor: white;
 .creation-wrapper {
   height: 100%;
   width: 100%;
-  background-color: red;
 }
 
 .shadowed {
   cursor: default !important;
   pointer-events: none;
   opacity: 0.1;
+  background-color: rgba(0,0,0,0.5);
 }

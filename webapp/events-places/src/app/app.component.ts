@@ -4,6 +4,7 @@ import {isNull} from "util";
 import {Register} from "ts-node";
 import {RegisterComponent} from "./register/register.component";
 import {PlaceComponent} from "./place/place.component";
+import {EventComponent} from "./events/event.component";
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,12 @@ import {PlaceComponent} from "./place/place.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements DoCheck {
-  public regState: boolean;
   state = '';
   currentUser = '';
 
   @ViewChild(RegisterComponent) regComp: RegisterComponent;
   @ViewChild(PlaceComponent) placeComp: PlaceComponent;
+  @ViewChild(EventComponent) eventComp: EventComponent;
 
   constructor() {}
 
@@ -31,11 +32,16 @@ export class AppComponent implements DoCheck {
         }
       }
     }
+    if (this.placeComp.bindingEvent) {
+      this.state = 'events';
+      this.placeComp.bindingEvent = false;
+      this.eventComp.openCV = true;
+      this.eventComp.newEvent.room_name = this.placeComp.currentPlace.room_name;
+    }
   }
 
   toRegister() {
     this.regComp.open = true
-    // this.router.navigate(['app/register']);
   }
 
   logout() {
@@ -54,6 +60,9 @@ export class AppComponent implements DoCheck {
 
   setState(st: string) {
     this.state = st;
+    if (st === 'events') {
+      this.placeComp.openUP = false;
+    }
   }
 
   hideChoice() {

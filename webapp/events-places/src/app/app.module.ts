@@ -11,6 +11,7 @@ import {CookieService} from "angular2-cookie/core";
 import {FormsModule} from "@angular/forms";
 import {PlaceComponent} from "./place/place.component";
 import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
+import {EventComponent} from "./events/event.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
     LoginComponent,
     RegisterComponent,
     PlaceComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

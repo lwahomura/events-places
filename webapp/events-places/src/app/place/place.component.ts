@@ -14,8 +14,11 @@ import {HttpHeaders} from "@angular/common/http";
 export class PlaceComponent implements OnInit {
   public openCP: boolean = false;
   public openUP: boolean = false;
+  public bindingEvent: boolean = false;
 
   public onlyMine: boolean = false;
+  public placeName: string = "";
+  public placeAddress: string = "";
   public minCost: number = 0;
   public maxCost: number = Infinity;
   public minSpace: number = 0;
@@ -30,7 +33,6 @@ export class PlaceComponent implements OnInit {
   public updatePlace: Place;
   public currentId: number;
   private baseUrl = "/api/places";
-  private eventUrl = "/api/events";
   private updateUrl = "/api/placesupdate";
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -41,6 +43,10 @@ export class PlaceComponent implements OnInit {
     this.currentId = -1;
     this.newPlace = new Place({landlord: this.currUser(), costs: "", square: 0, address: "", room_name: ""});
     this.updatePlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
+  }
+
+  createEvent() {
+    this.bindingEvent = true;
   }
 
   update() {
@@ -64,12 +70,13 @@ export class PlaceComponent implements OnInit {
   }
 
   updateThisPlace() {
+    console.log(this.updatePlace);
     const params = new URLSearchParams();
-    params.set('square', this.newPlace.square.toString());
-    params.set('costs', this.newPlace.costs.toString());
-    params.set('address', this.newPlace.address);
-    params.set('room_name', this.newPlace.room_name);
-    params.set('landlord', this.newPlace.landlord);
+    params.set('square', this.updatePlace.square.toString());
+    params.set('costs', this.updatePlace.costs.toString());
+    params.set('address', this.updatePlace.address);
+    params.set('room_name', this.updatePlace.room_name);
+    params.set('landlord', this.updatePlace.landlord);
     this.http.post(COMMON_ADDRESS + this.updateUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['response']['status'] === 'success') {
         window.location.reload();
@@ -116,6 +123,10 @@ export class PlaceComponent implements OnInit {
     })
   }
 
+  canPressCreateEvent() {
+    return this.currType() == '0' && this.currentId != -1;
+  }
+
   canPressUpdate() {
     return this.currType() == '2' && this.currentId != -1 && !this.openUP;
   }
@@ -146,8 +157,8 @@ export class PlaceComponent implements OnInit {
         }
       }
     });
-    this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1"});
-    this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2"});
+    // this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1"});
+    // this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2"});
 
     this.filterPlaces();
 
@@ -179,19 +190,27 @@ export class PlaceComponent implements OnInit {
   }
 
   filterPlaces() {
+    const nameRegexp = new RegExp(this.placeName);
+    const addressRegexp = new RegExp(this.placeAddress);
     this.filtredPlaces.length = 0;
     for (const item of this.places) {
       if (((this.onlyMine && item.landlord === this.currUser()) || !this.onlyMine) &&
         ((this.minCost == 0 ) || item.costs >= this.minCost) &&
         ((this.maxCost == Infinity ) || item.costs <= this.maxCost) &&
         ((this.minSpace == 0 ) || item.square >= this.minSpace) &&
-        ((this.maxSpace == Infinity ) || item.square <= this.maxSpace)
+        ((this.maxSpace == Infinity ) || item.square <= this.maxSpace) &&
+        (nameRegexp.test(item.room_name) && addressRegexp.test(item.address))
       ){
         this.filtredPlaces.push(item);
       }
     }
-    this.currentId = 0;
-    this.currentPlace = this.filtredPlaces[this.currentId];
+    if (this.filtredPlaces.length > 0) {
+      this.currentId = 0;
+      this.currentPlace = this.filtredPlaces[this.currentId];
+    } else {
+      this.currentId = -1;
+      this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
+    }
   }
 
   currType() {
