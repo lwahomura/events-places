@@ -78,7 +78,7 @@ export class PlaceComponent implements OnInit {
     params.set('room_name', this.updatePlace.room_name);
     params.set('landlord', this.updatePlace.landlord);
     this.http.post(COMMON_ADDRESS + this.updateUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
-      if (data['response']['status'] === 'success') {
+      if (data['status'] === 'success') {
         window.location.reload();
       } else {
         const s = document.createElement('script');
@@ -112,7 +112,7 @@ export class PlaceComponent implements OnInit {
     params.set('room_name', this.newPlace.room_name);
     params.set('creator', this.currUser());
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
-      if (data['response']['status'] === 'success') {
+      if (data['status'] === 'success') {
         window.location.reload();
       } else {
         const s = document.createElement('script');
@@ -149,7 +149,7 @@ export class PlaceComponent implements OnInit {
 
   ngOnInit() {
     this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
-      if (data['response']['status'] === 'success') {
+      if (data['status'] === 'success') {
         const pl = data['response'];
         for (const item of pl) {
           const p = new Place(item);

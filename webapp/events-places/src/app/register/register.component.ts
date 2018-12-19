@@ -43,8 +43,8 @@ export class RegisterComponent {
 
     console.log(params);
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
-      if (data['response']['status'] === 'success') {
-        this.setCookie("f_c", data['response']['cookie']);
+      if (data['status'] === 'success') {
+        this.setCookie("f_c", data['cookie']);
         this.open = false
       } else {
         const s = document.createElement('script');

@@ -44,7 +44,7 @@ export class EventComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
-      if (data['response']['status'] === 'success') {
+      if (data['status'] === 'success') {
         const ev = data['response'];
         for (const item of ev) {
           const e = new Event(item);
