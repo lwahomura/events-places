@@ -142,7 +142,7 @@ export class EventComponent implements OnInit, DoCheck {
     params.set('room_name', this.updateEvent.room_name);
     params.set('organizer', this.updateEvent.organizer);
     params.set('event_date', this.updateEvent.event_date);
-    params.set('event_costs', this.updateEvent.event_costs);
+    params.set('event_costs', this.updateEvent.event_costs.toString());
     this.http.post(COMMON_ADDRESS + this.updateUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         window.location.reload();
