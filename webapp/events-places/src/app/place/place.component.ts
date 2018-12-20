@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {Place} from "../datamodels/place";
 import {COMMON_ADDRESS} from "../datamodels/common_address";
 import {HttpClient} from "@angular/common/http";
@@ -11,10 +11,11 @@ import {HttpHeaders} from "@angular/common/http";
   styleUrls: ['./place.component.scss']
 })
 
-export class PlaceComponent implements OnInit {
+export class PlaceComponent implements OnInit, DoCheck {
   public openCP: boolean = false;
   public openUP: boolean = false;
   public bindingEvent: boolean = false;
+  public gotted: boolean = false;
 
   public onlyMine: boolean = false;
   public placeName: string = "";
@@ -41,8 +42,9 @@ export class PlaceComponent implements OnInit {
     this.places = [];
     this.filtredPlaces = [];
     this.currentId = -1;
-    this.newPlace = new Place({landlord: this.currUser(), costs: "", square: 0, address: "", room_name: ""});
-    this.updatePlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
+    this.newPlace = new Place({landlord: this.currUser(), costs: 0, square: 0, address: "", room_name: ""});
+    this.currentPlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
+    this.updatePlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
   }
 
   createEvent() {
@@ -156,18 +158,25 @@ export class PlaceComponent implements OnInit {
           this.places.push(p);
         }
       }
+      this.gotted = true;
+    }, error => {
+      this.gotted = true;
     });
-    // this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1"});
-    // this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2"});
+  }
 
-    this.filterPlaces();
+  ngDoCheck() {
+    if (this.gotted) {
+      this.gotted = false;
 
-    if (this.filtredPlaces.length > 0) {
-      this.currentId = 0;
-      this.currentPlace = this.filtredPlaces[this.currentId];
-    } else {
-      this.currentId = -1;
-      this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
+      this.filterPlaces();
+
+      if (this.filtredPlaces.length > 0) {
+        this.currentId = 0;
+        this.currentPlace = this.filtredPlaces[this.currentId];
+      } else {
+        this.currentId = -1;
+        this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
+      }
     }
   }
 
