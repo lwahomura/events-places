@@ -38,10 +38,6 @@ export class EventComponent implements OnInit, DoCheck {
   private updateUrl = "/api/eventsupdate";
   private deleteUrl = "/api/eventsdelete";
 
-  public subscriberName: string = "";
-  public subscriberEmail: string = "";
-
-
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
   constructor(private http: HttpClient) {
@@ -187,6 +183,14 @@ export class EventComponent implements OnInit, DoCheck {
         document.body.appendChild(s);
       }
     })
+  }
+
+  canPressSubscribe() {
+    return this.currType() == '' && this.currentId != -1;
+  }
+
+  subscribe() {
+    this.openSV = true;
   }
 
   formsDisabled() {

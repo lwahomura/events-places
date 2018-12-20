@@ -16,7 +16,7 @@ export class RegisterComponent {
   user = new User('', '', '', '', '');
   private baseUrl = '/api/register';
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -26,7 +26,6 @@ export class RegisterComponent {
   }
 
   register(): void {
-    console.log(this.user);
     const params = new URLSearchParams();
     params.set('username', this.user.username);
     params.set('password', this.user.password);
@@ -40,8 +39,6 @@ export class RegisterComponent {
       nType = '1';
     }
     params.set('type', nType);
-
-    console.log(params);
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         this.setCookie("f_c", data['cookie']);

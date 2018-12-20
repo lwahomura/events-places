@@ -5,6 +5,7 @@ import {Register} from "ts-node";
 import {RegisterComponent} from "./register/register.component";
 import {PlaceComponent} from "./place/place.component";
 import {EventComponent} from "./events/event.component";
+import {SubscribeComponent} from "./subscribe/subscribe.component";
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,13 @@ import {EventComponent} from "./events/event.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements DoCheck {
-  state = '';
-  currentUser = '';
+  public state = '';
+  public currentUser = '';
 
   @ViewChild(RegisterComponent) regComp: RegisterComponent;
   @ViewChild(PlaceComponent) placeComp: PlaceComponent;
   @ViewChild(EventComponent) eventComp: EventComponent;
+  @ViewChild(SubscribeComponent) subComp: SubscribeComponent;
 
   constructor() {}
 
@@ -37,6 +39,11 @@ export class AppComponent implements DoCheck {
       this.placeComp.bindingEvent = false;
       this.eventComp.creationHandling = true;
       this.eventComp.newEvent.room_name = this.placeComp.currentPlace.room_name;
+    }
+    if (this.eventComp.openSV) {
+      this.eventComp.openSV = false;
+      this.subComp.open = true;
+      this.subComp.event_name = this.eventComp.currentEvent.event_name;
     }
   }
 

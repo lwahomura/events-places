@@ -203,7 +203,7 @@
 
       <div class="wrapper option hoverable" [class.hidden]="!canPressUpdate()">
         <div class="wrapper button-text">
-          <button name="UpdatePlace" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
+          <button name="UpdateEvent" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
         </div>
       </div>
       <div class="wrapper option" [class.hidden]="!canPressUpdateSave()">
@@ -230,6 +230,12 @@
       <div class="wrapper option" [class.hidden]="!canPressDeleteSave()">
         <div class="wrapper button-text">
           <button name="StopDelete" class="filter-button square-button" value="Отменить" (click)="stopDeleting()">Отменить</button>
+        </div>
+      </div>
+
+      <div class="wrapper option hoverable" [class.hidden]="!canPressSubscribe()">
+        <div class="wrapper button-text">
+          <button name="Subscribe" class="filter-button square-button" value="Подписаться" (click)="subscribe()">Подписаться</button>
         </div>
       </div>
     </div>

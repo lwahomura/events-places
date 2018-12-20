@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import {PlaceComponent} from "./place/place.component";
 import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {EventComponent} from "./events/event.component";
+import {SubscribeComponent} from "./subscribe/subscribe.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {EventComponent} from "./events/event.component";
     LoginComponent,
     RegisterComponent,
     PlaceComponent,
-    EventComponent
+    EventComponent,
+    SubscribeComponent
   ],
   imports: [
     BrowserModule,
