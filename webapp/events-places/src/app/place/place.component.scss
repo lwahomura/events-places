@@ -13,7 +13,7 @@ $choicecolor: white;
       height: 80%;
       width: 100%;
       position: absolute;
-      top: 5%;
+      top: 0;
 
       .filter-wrapper {
         height: 10%;
@@ -82,7 +82,6 @@ $choicecolor: white;
       height: 10%;
       width: 100%;
       position: absolute;
-      bottom: 0;
 
       .form-wrapper {
         position: absolute;
@@ -95,6 +94,14 @@ $choicecolor: white;
           width: 90%;
         }
       }
+    }
+
+    .f-submit {
+      bottom: 5%
+    }
+
+    .s-submit {
+      bottom: 0;
     }
   }
 

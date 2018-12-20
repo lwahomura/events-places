@@ -14,6 +14,7 @@ import {HttpHeaders} from "@angular/common/http";
 export class PlaceComponent implements OnInit, DoCheck {
   public openCP: boolean = false;
   public openUP: boolean = false;
+  public openDP: boolean = false;
   public bindingEvent: boolean = false;
   public gotted: boolean = false;
 
@@ -35,6 +36,7 @@ export class PlaceComponent implements OnInit, DoCheck {
   public currentId: number;
   private baseUrl = "/api/places";
   private updateUrl = "/api/placesupdate";
+  private deleteUrl = "/api/placesdelete";
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
@@ -45,6 +47,31 @@ export class PlaceComponent implements OnInit, DoCheck {
     this.newPlace = new Place({landlord: this.currUser(), costs: 0, square: 0, address: "", room_name: ""});
     this.currentPlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
     this.updatePlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
+  }
+
+  ngOnInit() {
+    console.log(this.currentPlace);
+    this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1", full_cost: 19* 100});
+    this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2", full_cost: 15 * 123});
+    this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
+      if (data['status'] === 'success') {
+        const pl = data['response'];
+        for (const item of pl) {
+          const p = new Place(item);
+          this.places.push(p);
+        }
+      }
+      this.gotted = true;
+    }, err => {
+      this.gotted = true;
+    });
+  }
+
+  ngDoCheck() {
+    if (this.gotted) {
+      this.gotted = false;
+      this.filterPlaces();
+    }
   }
 
   createEvent() {
@@ -91,6 +118,29 @@ export class PlaceComponent implements OnInit, DoCheck {
     })
   }
 
+  delete() {
+    this.openDP = true;
+  }
+
+  stopDeleting() {
+    this.openDP = false;
+  }
+
+  deletePlace() {
+    const params = new URLSearchParams();
+    params.append('room_name', this.currentPlace.room_name);
+    console.log(params.toString());
+    this.http.post(COMMON_ADDRESS + this.deleteUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+      if (data['status'] === 'success') {
+        window.location.reload();
+      } else {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.innerHTML = 'alert(\'Удаление не удалось\');';
+        document.body.appendChild(s);
+      }
+    })
+  }
 
   create() {
     this.openCP = true;
@@ -125,12 +175,20 @@ export class PlaceComponent implements OnInit, DoCheck {
     })
   }
 
+  canPressDelete() {
+    return this.currType() == '2' && this.currentId != -1 && !this.openUP && !this.openDP;
+  }
+
+  canPressDeleteSave() {
+    return this.openDP;
+  }
+
   canPressCreateEvent() {
     return this.currType() == '0' && this.currentId != -1;
   }
 
   canPressUpdate() {
-    return this.currType() == '2' && this.currentId != -1 && !this.openUP;
+    return this.currType() == '2' && this.currentId != -1 && !this.openUP && !this.openDP;
   }
 
   canPressUpdateSave() {
@@ -147,37 +205,6 @@ export class PlaceComponent implements OnInit, DoCheck {
 
   formsDisabled() {
     return this.currType() != "2" || this.currentId == -1 || !this.openUP;
-  }
-
-  ngOnInit() {
-    this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
-      if (data['status'] === 'success') {
-        const pl = data['response'];
-        for (const item of pl) {
-          const p = new Place(item);
-          this.places.push(p);
-        }
-      }
-      this.gotted = true;
-    }, error => {
-      this.gotted = true;
-    });
-  }
-
-  ngDoCheck() {
-    if (this.gotted) {
-      this.gotted = false;
-
-      this.filterPlaces();
-
-      if (this.filtredPlaces.length > 0) {
-        this.currentId = 0;
-        this.currentPlace = this.filtredPlaces[this.currentId];
-      } else {
-        this.currentId = -1;
-        this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
-      }
-    }
   }
 
   notShowPrev() {
@@ -204,8 +231,8 @@ export class PlaceComponent implements OnInit, DoCheck {
     this.filtredPlaces.length = 0;
     for (const item of this.places) {
       if (((this.onlyMine && item.landlord === this.currUser()) || !this.onlyMine) &&
-        ((this.minCost == 0 ) || item.costs >= this.minCost) &&
-        ((this.maxCost == Infinity ) || item.costs <= this.maxCost) &&
+        ((this.minCost == 0 ) || item.full_cost >= this.minCost) &&
+        ((this.maxCost == Infinity ) || item.full_cost <= this.maxCost) &&
         ((this.minSpace == 0 ) || item.square >= this.minSpace) &&
         ((this.maxSpace == Infinity ) || item.square <= this.maxSpace) &&
         (nameRegexp.test(item.room_name) && addressRegexp.test(item.address))
@@ -220,6 +247,27 @@ export class PlaceComponent implements OnInit, DoCheck {
       this.currentId = -1;
       this.currentPlace = new Place({landlord: "", costs: "", square: 0, address: "", room_name: ""});
     }
+  }
+
+  filtersValid() {
+    return (this.minCost >= 0) &&
+      (this.maxCost >= 0) &&
+      (this.minCost <= this.maxCost) &&
+      (this.minSpace >= 0) &&
+      (this.maxSpace >= 0) &&
+      (this.minSpace <= this.maxSpace)
+  }
+
+  filtersBack() {
+    this.onlyMine = false;
+    this.placeName = "";
+    this.placeAddress = "";
+    this.minCost = 0;
+    this.maxCost = Infinity;
+    this.minSpace = 0;
+    this.maxSpace = Infinity;
+
+    this.filterPlaces();
   }
 
   currType() {
@@ -257,14 +305,5 @@ export class PlaceComponent implements OnInit, DoCheck {
       .map(cookie => {
         return decodeURIComponent(cookie.substring(nameLenPlus));
       })[0] || null;
-  }
-
-  filtersValid() {
-    return (this.minCost >= 0) &&
-      (this.maxCost >= 0) &&
-      (this.minCost <= this.maxCost) &&
-      (this.minSpace >= 0) &&
-      (this.maxSpace >= 0) &&
-      (this.minSpace <= this.maxSpace)
   }
 }

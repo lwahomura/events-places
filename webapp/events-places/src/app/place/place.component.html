@@ -1,5 +1,5 @@
 <div class="wrapper all-places-wrapper">
-  <div class="bordered-wrapper filter-wrapper" [class.shadowed]="openCP || places.length == 0">
+  <div class="bordered-wrapper filter-wrapper" [class.shadowed]="openDP || openUP|| openCP || places.length == 0">
     <div class="wrapper filter-content-wrapper">
       <div class="wrapper first-prop filter-wrapper">
         <div class="wrapper filter-name">
@@ -60,7 +60,12 @@
         </div>
       </div>
     </div>
-    <div class="wrapper filter-submit-wrapper">
+    <div class="wrapper filter-submit-wrapper f-submit">
+      <div class="form-wrapper">
+        <button name="Back" class="filter-button" value="Filters" (click)="filtersBack()">Сбросить</button>
+      </div>
+    </div>
+    <div class="wrapper filter-submit-wrapper s-submit">
       <div class="form-wrapper">
         <button name="Submit" class="filter-button" [class.button-unready]="!filtersValid()" [disabled]="!filtersValid()" value="Filters" (click)="filterPlaces()">Применить</button>
       </div>
@@ -99,7 +104,7 @@
               <h3 class="p-name">Цена</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.costs">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="currentPlace.full_cost">
             </div>
           </div>
         </div>
@@ -114,7 +119,7 @@
               <h3 class="p-name">Название</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.room_name">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updatePlace.room_name">
             </div>
           </div>
           <div class="wrapper property-wrapper second-prop">
@@ -122,7 +127,7 @@
               <h3 class="p-name">Местоположение</h3>
             </div>
             <div class="wrapper property-value">
-              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.address">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updatePlace.address">
             </div>
           </div>
           <div class="wrapper property-wrapper third-prop">
@@ -135,7 +140,7 @@
           </div>
           <div class="wrapper property-wrapper fourth-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Цена</h3>
+              <h3 class="p-name">Цена единицы</h3>
             </div>
             <div class="wrapper property-value">
               <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.costs">
@@ -174,7 +179,7 @@
           </div>
           <div class="wrapper property-wrapper fourth-prop">
             <div class="wrapper property-name">
-              <h3 class="p-name">Цена</h3>
+              <h3 class="p-name">Цена единицы</h3>
             </div>
             <div class="wrapper property-value">
               <input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.costs">
@@ -185,53 +190,70 @@
     </div>
 
     <div class="wrapper controls-wrapper">
-      <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressCreate()">
+      <div class="wrapper option hoverable" [class.hidden]="!canPressCreate()">
         <div class="wrapper button-text">
           <button name="CreatePlace" class="filter-button square-button" value="Создать" (click)="create()">Добавить</button>
         </div>
       </div>
-      <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
+      <div class="wrapper option" [class.hidden]="!canPressSave()">
         <div class="wrapper button-text">
           <button name="SavePlace" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createPlace()">Создать</button>
         </div>
       </div>
-      <div class="bordered-wrapper option" [class.hidden]="!canPressSave()">
+      <div class="wrapper option" [class.hidden]="!canPressSave()">
         <div class="wrapper button-text">
           <button name="StopCreate" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>
         </div>
       </div>
 
-      <div class="bordered-wrapper option hoverable" [class.hidden]="!canPressUpdate()">
+      <div class="wrapper option hoverable" [class.hidden]="!canPressUpdate()">
         <div class="wrapper button-text">
           <button name="UpdatePlace" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
         </div>
       </div>
-      <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
+      <div class="wrapper option" [class.hidden]="!canPressUpdateSave()">
         <div class="wrapper button-text">
           <button name="SaveUpdate" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>
         </div>
       </div>
-      <div class="bordered-wrapper option" [class.hidden]="!canPressUpdateSave()">
+      <div class="wrapper option" [class.hidden]="!canPressUpdateSave()">
         <div class="wrapper button-text">
           <button name="StopUpdate" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>
         </div>
       </div>
-      <div class="bordered-wrapper option" [class.hidden]="!canPressCreateEvent()">
+
+      <div class="wrapper option" [class.hidden]="!canPressCreateEvent()">
         <div class="wrapper button-text">
           <button name="CreateEvent" class="filter-button square-button" value="Арендовать" (click)="createEvent()">Арендовать</button>
+        </div>
+      </div>
+
+      <div class="wrapper option" [class.hidden]="!canPressDelete()">
+        <div class="wrapper button-text">
+          <button name="Delete" class="filter-button square-button" value="Удалить" (click)="delete()">Удалить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressDeleteSave()">
+        <div class="wrapper button-text">
+          <button name="SubmitDelete" class="filter-button square-button" value="Удалить" (click)="deletePlace()">Удалить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressDeleteSave()">
+        <div class="wrapper button-text">
+          <button name="StopDelete" class="filter-button square-button" value="Отменить" (click)="stopDeleting()">Отменить</button>
         </div>
       </div>
     </div>
 
     <div class="wrapper paginate-controls-wrapper">
       <div class="wrapper controls-wrapper">
-        <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" [class.shadowed]="openCP || openUP" (click)="toPrev()">
+        <div class="bordered-wrapper control previous hoverable" [class.notclickable]="notShowPrev()" [class.shadowed]="openCP || openUP || openDP" (click)="toPrev()">
           <h3 class="p-name" [class.hidden]="notShowPrev()"><</h3>
         </div>
-        <div class="bordered-wrapper control current">
-          <h3 class="p-name" [class.shadowed]="openCP">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
+        <div class="bordered-wrapper control current" [class.shadowed]="openCP">
+          <h3 class="p-name">{{currentId + 1}} / {{filtredPlaces.length}} </h3>
         </div>
-        <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" [class.shadowed]="openCP || openUP" (click)="toNext()">
+        <div class="bordered-wrapper control next hoverable" [class.notclickable]="notShowNext()" [class.shadowed]="openCP || openUP || openDP" (click)="toNext()">
           <h3 class="p-name" [class.hidden]="notShowNext()">></h3>
         </div>
       </div>
