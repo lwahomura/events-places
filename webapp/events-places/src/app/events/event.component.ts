@@ -44,7 +44,7 @@ export class EventComponent implements OnInit, DoCheck {
     this.events = [];
     this.filtredEvents = [];
     this.currentId = -1;
-    this.newEvent = new Event({organizer: this.currUser(), room_name: "", event_name: "", event_date: "", event_costs: 0});
+    this.newEvent = new Event({organizer: "", room_name: "", event_name: "", event_date: "", event_costs: 0});
     this.updateEvent = new Event({organizer: "", room_name: "", event_name: "", event_date: "", event_costs: 0});
     this.currentEvent = new Event({organizer: "", room_name: "", event_name: "", event_date: "", event_costs: 0});
   }
@@ -94,9 +94,10 @@ export class EventComponent implements OnInit, DoCheck {
     const params = new URLSearchParams();
     params.set('event_name', this.newEvent.event_name);
     params.set('room_name', this.newEvent.room_name);
-    params.set('organizer', this.newEvent.organizer);
+    params.set('organizer', this.currUser());
     params.set('event_date', this.newEvent.event_date);
     params.set('event_costs', this.newEvent.event_costs.toString());
+    console.log(params.toString());
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         window.location.reload();
@@ -137,11 +138,11 @@ export class EventComponent implements OnInit, DoCheck {
 
   updateThisEvent() {
     const params = new URLSearchParams();
-    params.set('event_name', this.newEvent.event_name);
-    params.set('room_name', this.newEvent.room_name);
-    params.set('organizer', this.newEvent.organizer);
-    params.set('event_date', this.newEvent.event_date);
-    params.set('event_date', this.newEvent.event_date);
+    params.set('event_name', this.updateEvent.event_name);
+    params.set('room_name', this.updateEvent.room_name);
+    params.set('organizer', this.updateEvent.organizer);
+    params.set('event_date', this.updateEvent.event_date);
+    params.set('event_date', this.updateEvent.event_date);
     this.http.post(COMMON_ADDRESS + this.updateUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         window.location.reload();
@@ -275,6 +276,7 @@ export class EventComponent implements OnInit, DoCheck {
     if (!isNull(cookie)) {
       const decoded = (atob(cookie));
       const parts = decoded.split("&", -1);
+      console.log(decoded);
       if (parts.length === 2) {
         return parts[1];
       }

@@ -44,7 +44,7 @@ export class PlaceComponent implements OnInit, DoCheck {
     this.places = [];
     this.filtredPlaces = [];
     this.currentId = -1;
-    this.newPlace = new Place({landlord: this.currUser(), costs: 0, square: 0, address: "", room_name: ""});
+    this.newPlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
     this.currentPlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
     this.updatePlace = new Place({landlord: "", costs: 0, square: 0, address: "", room_name: ""});
   }
