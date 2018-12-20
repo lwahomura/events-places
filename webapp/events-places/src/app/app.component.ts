@@ -35,7 +35,7 @@ export class AppComponent implements DoCheck {
     if (this.placeComp.bindingEvent) {
       this.state = 'events';
       this.placeComp.bindingEvent = false;
-      this.eventComp.openCV = true;
+      this.eventComp.creationHandling = true;
       this.eventComp.newEvent.room_name = this.placeComp.currentPlace.room_name;
     }
   }
@@ -62,6 +62,14 @@ export class AppComponent implements DoCheck {
     this.state = st;
     if (st === 'events') {
       this.placeComp.openUP = false;
+      this.placeComp.openCP = false;
+      this.placeComp.openDP = false;
+    }
+    if (st === 'places') {
+      this.eventComp.openCV = false;
+      this.eventComp.creationHandling = false;
+      this.eventComp.openDV = false;
+      this.eventComp.openUV = false;
     }
   }
 

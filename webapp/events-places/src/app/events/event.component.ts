@@ -72,9 +72,10 @@ export class EventComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.openCV && !this.creationHandling) {
+    if (!this.openCV && this.creationHandling) {
       console.log(this.newEvent);
-      this.creationHandling = true;
+      this.creationHandling = false;
+      this.openCV = true;
     }
     if (this.gotted) {
       this.gotted = false;
@@ -82,6 +83,28 @@ export class EventComponent implements OnInit, DoCheck {
     }
   }
 
+  canPressSave() {
+    return this.openCV;
+  }
+
+  stopCreating() {
+    this.newEvent = new Event({organizer: this.currUser(), room_name: "", event_name: "", event_date: "", event_costs: 0})
+    this.openCV = false;
+  }
+
+  canCreate() {
+    return this.newEvent.event_name.length > 0 && this.newEvent.event_date.length > 0 && this.newEvent.event_costs > 0;
+  }
+
+  createEvent() {
+    const params = new URLSearchParams();
+    params.set('event_name', this.newEvent.event_name);
+    params.set('room_name', this.newEvent.room_name);
+    params.set('organizer', this.newEvent.organizer);
+    params.set('event_date', this.newEvent.event_date);
+    params.set('event_costs', this.newEvent.event_costs.toString());
+    console.log(params.toString());
+  }
 
 
   formsDisabled() {

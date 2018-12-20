@@ -49,7 +49,7 @@
           <input class="form-input" type="text" [(ngModel)]="maxCost">
         </div>
       </div>
-      <div class="wrapper seventh-prop filter-wrapper" [class.hidden]="currType() != '1'">
+      <div class="wrapper seventh-prop filter-wrapper" [class.hidden]="currType() != '0'">
         <div class="wrapper filter-name">
           <h3 class="f-name">Принадлежащие мне:</h3>
         </div>
@@ -150,61 +150,56 @@
       <!--</div>-->
     <!--</div>-->
 
-    <!--<div class="wrapper event-content-wrapper" [class.hidden]="!openCV">-->
-      <!--<div class="bordered-wrapper place-info-wrapper">-->
-        <!--<div class="wrapper properties-wrapper">-->
-          <!--<div class="wrapper property-wrapper first-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Название</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.room_name">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper second-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Местоположение</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.address">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper third-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Площадь</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.square">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper fourth-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Цена единицы</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" placeholder="" [(ngModel)]="newPlace.costs">-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="wrapper event-content-wrapper" [class.hidden]="!openCV">
+      <div class="bordered-wrapper event-info-wrapper">
+        <div class="wrapper properties-wrapper">
+          <div class="wrapper property-wrapper first-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Название</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newEvent.event_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper second-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Место</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="newEvent.room_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Дата</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newEvent.event_date">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper fourth-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" placeholder="" [(ngModel)]="newEvent.event_costs">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="wrapper controls-wrapper">
-      <!--<div class="wrapper option hoverable" [class.hidden]="!canPressCreate()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="CreatePlace" class="filter-button square-button" value="Создать" (click)="create()">Добавить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="SavePlace" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createPlace()">Создать</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="StopCreate" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="wrapper option" [class.hidden]="!canPressSave()">
+        <div class="wrapper button-text">
+          <button name="SaveEvent" class="filter-button square-button" [class.button-unready]="!canCreate()" [disabled]="!canCreate()" value="Создать" (click)="createEvent()">Создать</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressSave()">
+        <div class="wrapper button-text">
+          <button name="StopCreate" class="filter-button square-button" value="Отменить" (click)="stopCreating()">Отменить</button>
+        </div>
+      </div>
 
       <!--<div class="wrapper option hoverable" [class.hidden]="!canPressUpdate()">-->
         <!--<div class="wrapper button-text">-->
