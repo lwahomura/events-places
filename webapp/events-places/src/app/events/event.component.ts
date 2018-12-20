@@ -103,7 +103,61 @@ export class EventComponent implements OnInit, DoCheck {
     params.set('organizer', this.newEvent.organizer);
     params.set('event_date', this.newEvent.event_date);
     params.set('event_costs', this.newEvent.event_costs.toString());
-    console.log(params.toString());
+    this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+      if (data['status'] === 'success') {
+        window.location.reload();
+      } else {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.innerHTML = 'alert(\'Добавление не удалось\');';
+        document.body.appendChild(s);
+      }
+    })
+  }
+
+  canPressUpdate() {
+    return this.currType() == '2' && this.currentId != -1 && !this.openUV && !this.openDV;
+  }
+
+  canPressUpdateSave() {
+    return this.currType() == '2' && this.currentId != -1 && this.openUV;
+  }
+
+  update() {
+    this.updateEvent.event_costs = this.currentEvent.event_costs;
+    this.updateEvent.event_name = this.currentEvent.event_name;
+    this.updateEvent.room_name = this.currentEvent.room_name;
+    this.updateEvent.organizer = this.currentEvent.organizer;
+    this.updateEvent.event_date = this.currentEvent.event_date;
+    this.openUV = true;
+  }
+
+  stopUpdating() {
+    this.openUV = false;
+  }
+
+  canUpdate() {
+    return this.currentEvent.event_date != this.updateEvent.event_date ||
+      this.currentEvent.event_costs != this.updateEvent.event_costs
+  }
+
+  updateThisEvent() {
+    const params = new URLSearchParams();
+    params.set('event_name', this.newEvent.event_name);
+    params.set('room_name', this.newEvent.room_name);
+    params.set('organizer', this.newEvent.organizer);
+    params.set('event_date', this.newEvent.event_date);
+    params.set('event_date', this.newEvent.event_date);
+    this.http.post(COMMON_ADDRESS + this.updateUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+      if (data['status'] === 'success') {
+        window.location.reload();
+      } else {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.innerHTML = 'alert(\'Изменение не удалось\');';
+        document.body.appendChild(s);
+      }
+    })
   }
 
 

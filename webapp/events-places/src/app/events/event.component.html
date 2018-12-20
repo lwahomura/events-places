@@ -111,44 +111,44 @@
       </div>
     </div>
 
-    <!--<div class="wrapper event-content-wrapper" [class.hidden]="!openUV">-->
-      <!--<div class="bordered-wrapper place-info-wrapper">-->
-        <!--<div class="wrapper properties-wrapper">-->
-          <!--<div class="wrapper property-wrapper first-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Название</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updatePlace.room_name">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper second-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Местоположение</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updatePlace.address">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper third-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Площадь</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.square">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="wrapper property-wrapper fourth-prop">-->
-            <!--<div class="wrapper property-name">-->
-              <!--<h3 class="p-name">Цена единицы</h3>-->
-            <!--</div>-->
-            <!--<div class="wrapper property-value">-->
-              <!--<input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updatePlace.costs">-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="wrapper event-content-wrapper" [class.hidden]="!openUV">
+      <div class="bordered-wrapper event-info-wrapper">
+        <div class="wrapper properties-wrapper">
+          <div class="wrapper property-wrapper first-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Название</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updateEvent.event_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper second-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Место</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="true" placeholder="" [(ngModel)]="updateEvent.room_name">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper third-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Дата</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updateEvent.event_date">
+            </div>
+          </div>
+          <div class="wrapper property-wrapper fourth-prop">
+            <div class="wrapper property-name">
+              <h3 class="p-name">Цена</h3>
+            </div>
+            <div class="wrapper property-value">
+              <input class="form-input" type="text" [disabled]="formsDisabled()" placeholder="" [(ngModel)]="updateEvent.event_costs">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="wrapper event-content-wrapper" [class.hidden]="!openCV">
       <div class="bordered-wrapper event-info-wrapper">
@@ -201,27 +201,21 @@
         </div>
       </div>
 
-      <!--<div class="wrapper option hoverable" [class.hidden]="!canPressUpdate()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="UpdatePlace" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressUpdateSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="SaveUpdate" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressUpdateSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="StopUpdate" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="wrapper option" [class.hidden]="!canPressCreateEvent()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="CreateEvent" class="filter-button square-button" value="Арендовать" (click)="createEvent()">Арендовать</button>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="wrapper option hoverable" [class.hidden]="!canPressUpdate()">
+        <div class="wrapper button-text">
+          <button name="UpdatePlace" class="filter-button square-button" value="Создать" (click)="update()">Обновить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressUpdateSave()">
+        <div class="wrapper button-text">
+          <button name="SaveUpdate" class="filter-button square-button" [class.button-unready]="!canUpdate()" [disabled]="!canUpdate()" value="Сохранить" (click)="updateThisPlace()">Сохранить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressUpdateSave()">
+        <div class="wrapper button-text">
+          <button name="StopUpdate" class="filter-button square-button" value="Отменить" (click)="stopUpdating()">Отменить</button>
+        </div>
+      </div>
 
       <!--<div class="wrapper option" [class.hidden]="!canPressDelete()">-->
         <!--<div class="wrapper button-text">-->

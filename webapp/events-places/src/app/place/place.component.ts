@@ -92,13 +92,10 @@ export class PlaceComponent implements OnInit, DoCheck {
 
   canUpdate() {
     return this.currentPlace.square != this.updatePlace.square ||
-      this.currentPlace.room_name != this.updatePlace.room_name ||
-      this.currentPlace.address != this.updatePlace.address ||
       this.currentPlace.costs != this.updatePlace.costs
   }
 
   updateThisPlace() {
-    console.log(this.updatePlace);
     const params = new URLSearchParams();
     params.set('square', this.updatePlace.square.toString());
     params.set('costs', this.updatePlace.costs.toString());
