@@ -51,8 +51,8 @@ export class PlaceComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     console.log(this.currentPlace);
-    this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1", full_cost: 19* 100});
-    this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2", full_cost: 15 * 123});
+    // this.places.push({landlord: "user", costs: 100, square: 19, address: "address 1", room_name: "room 1", full_cost: 19* 100});
+    // this.places.push({landlord: "user1", costs: 123, square: 15, address: "address 2", room_name: "room 2", full_cost: 15 * 123});
     this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
       if (data['status'] === 'success') {
         const pl = data['response'];
