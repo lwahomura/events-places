@@ -125,7 +125,6 @@ export class PlaceComponent implements OnInit, DoCheck {
   deletePlace() {
     const params = new URLSearchParams();
     params.append('room_name', this.currentPlace.room_name);
-    console.log(params.toString());
     this.http.post(COMMON_ADDRESS + this.deleteUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         window.location.reload();

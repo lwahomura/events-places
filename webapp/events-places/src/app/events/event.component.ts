@@ -56,7 +56,6 @@ export class EventComponent implements OnInit, DoCheck {
   ngOnInit() {
     // this.events.push({organizer: "user", room_name: "room 1", event_name: "event 1", event_date: "2018-22-07", event_costs: 10});
     // this.events.push({organizer: "user 1", room_name: "room 2", event_name: "event 2", event_date: "2018-01-02", event_costs: 35});
-
     this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
       if (data['status'] === 'success') {
         const ev = data['response'];
@@ -73,7 +72,6 @@ export class EventComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!this.openCV && this.creationHandling) {
-      console.log(this.newEvent);
       this.creationHandling = false;
       this.openCV = true;
     }
@@ -160,6 +158,36 @@ export class EventComponent implements OnInit, DoCheck {
     })
   }
 
+  canPressDelete() {
+    return this.currType() == '2' && this.currentId != -1 && !this.openUV && !this.openDV;
+  }
+
+  canPressDeleteSave() {
+    return this.openDV;
+  }
+
+  delete() {
+    this.openDV = true;
+  }
+
+  stopDeleting() {
+    this.openDV = false;
+  }
+
+  deleteEvent() {
+    const params = new URLSearchParams();
+    params.append('event_name', this.currentEvent.event_name);
+    this.http.post(COMMON_ADDRESS + this.deleteUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
+      if (data['status'] === 'success') {
+        window.location.reload();
+      } else {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.innerHTML = 'alert(\'Удаление не удалось\');';
+        document.body.appendChild(s);
+      }
+    })
+  }
 
   formsDisabled() {
     return this.currType() != "2" || this.currentId == -1 || !this.openUV;

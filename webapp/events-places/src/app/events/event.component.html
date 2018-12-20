@@ -217,21 +217,21 @@
         </div>
       </div>
 
-      <!--<div class="wrapper option" [class.hidden]="!canPressDelete()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="Delete" class="filter-button square-button" value="Удалить" (click)="delete()">Удалить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressDeleteSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="SubmitDelete" class="filter-button square-button" value="Удалить" (click)="deleteEvent()">Удалить</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="wrapper option" [class.hidden]="!canPressDeleteSave()">-->
-        <!--<div class="wrapper button-text">-->
-          <!--<button name="StopDelete" class="filter-button square-button" value="Отменить" (click)="stopDeleting()">Отменить</button>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="wrapper option" [class.hidden]="!canPressDelete()">
+        <div class="wrapper button-text">
+          <button name="Delete" class="filter-button square-button" value="Удалить" (click)="delete()">Удалить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressDeleteSave()">
+        <div class="wrapper button-text">
+          <button name="SubmitDelete" class="filter-button square-button" value="Удалить" (click)="deleteEvent()">Удалить</button>
+        </div>
+      </div>
+      <div class="wrapper option" [class.hidden]="!canPressDeleteSave()">
+        <div class="wrapper button-text">
+          <button name="StopDelete" class="filter-button square-button" value="Отменить" (click)="stopDeleting()">Отменить</button>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper paginate-controls-wrapper">
