@@ -1,0 +1,259 @@
+$choicecolor: white;
+
+.all-events-wrapper {
+  height: 100%;
+  width: 100%;
+
+  .filter-wrapper {
+    height: 100%;
+    width: 20%;
+    position: relative;
+
+    .filter-content-wrapper {
+      height: 80%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+
+      .filter-wrapper {
+        height: 10%;
+        width: 100%;
+
+        .filter-name {
+          height: 50%;
+          width: 100%;
+          position: relative;
+
+          .f-name {
+            height: 100%;
+            width: 100%;
+            font-size: 15px;
+            top: -10%;
+            position: absolute;
+          }
+        }
+
+        .filter-value {
+          height: 50%;
+          width: 100%;
+          text-align: center;
+          position: relative;
+
+          .form-input {
+            left: 10%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80%;
+          }
+        }
+      }
+
+      .first-prop {
+        top: 0;
+      }
+
+      .second-prop {
+        top: 5%;
+      }
+
+      .third-prop {
+        top: 10%;
+      }
+
+      .fourth-prop {
+        top: 15%;
+      }
+
+      .fifth-prop {
+        top: 20%;
+      }
+
+      .sixth-prop {
+        top: 25%;
+      }
+
+      .seventh-prop {
+        top: 30%;
+      }
+    }
+
+    .filter-submit-wrapper {
+      height: 10%;
+      width: 100%;
+      position: absolute;
+
+      .form-wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+
+        .filter-button {
+          width: 90%;
+        }
+      }
+    }
+
+    .f-submit {
+      bottom: 5%
+    }
+
+    .s-submit {
+      bottom: 0;
+    }
+  }
+
+  .events-wrapper {
+    height: 100%;
+    width: 80%;
+
+    .event-content-wrapper {
+      height: 90%;
+      width: 90%;
+      position: relative;
+
+      .event-info-wrapper {
+        height: 90%;
+        width: 90%;
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        transform: translateY(-50%);
+
+        .properties-wrapper {
+          height: 100%;
+          width: 100%;
+          position: relative;
+
+          .property-wrapper {
+            left: 10%;
+            width: 80%;
+            height: 10%;
+            position: absolute;
+
+            .property-name {
+              width: 30%;
+              height: 100%;
+
+              .p-name {
+                height: 100%;
+                width: 100%;
+                font-size: 23px;
+                text-align: center;
+              }
+            }
+
+            .property-value {
+              top: 10%;
+              width: 70%;
+              height: 100%;
+              text-align: center;
+              position: relative;
+
+              .form-input {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 80%;
+                left: 10%;
+              }
+            }
+          }
+
+          .first-prop {
+            top: 10%;
+          }
+
+          .second-prop {
+            top: 30%;
+          }
+
+          .third-prop {
+            top: 50%;
+          }
+
+          .fourth-prop {
+            top: 70%;
+          }
+        }
+      }
+    }
+
+
+    .controls-wrapper {
+      height: 90%;
+      width: 10%;
+
+      .option {
+        width: 100%;
+        height: 10%;
+
+        .button-text {
+          height: 100%;
+          width: 100%;
+          position: relative;
+
+          .square-button {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .hoverable:hover {
+        background-color: darken($choicecolor, 20%);
+        cursor: pointer;
+      }
+    }
+
+
+    .paginate-controls-wrapper {
+      height: 10%;
+      width: 100%;
+      position: relative;
+
+      .controls-wrapper {
+        position: absolute;
+        height: 100%;
+        width: 30%;
+        left: 35%;
+
+        .control {
+          width: calc(100% / 3);
+          height: 100%;
+        }
+
+        .hoverable:hover {
+          background-color: darken($choicecolor, 20%);
+        }
+
+        .previous, .next {
+          cursor: pointer;
+        }
+
+        .p-name {
+          font-size: 23px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.creationActive{
+  pointer-events: all !important;
+}
+
+.creation-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.shadowed {
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.1;
+  background-color: rgba(0,0,0,0.5);
+}
