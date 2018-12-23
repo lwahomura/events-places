@@ -21,8 +21,12 @@ export class RegisterComponent {
   }
 
   readyToSend() {
-    return this.user.username.length !== 0 && this.user.password.length !== 0 && this.user.a_t.length !== 0 &&
-      this.user.name.length != 0 && this.user.email.length != 0
+    const EmailReg = /[^@.]+@[^@.]+\.[^@.]+/;
+    return this.user.username.length !== 0 && this.user.username.length < 20 &&
+      this.user.password.length !== 0 && this.user.password.length < 20 &&
+      this.user.a_t.length !== 0 &&
+      this.user.name.length != 0 && this.user.name.length < 20 &&
+      this.user.email.length != 0 && EmailReg.test(this.user.email)
   }
 
   register(): void {

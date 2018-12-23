@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {isNull} from "util";
 import {Event} from "../datamodels/event"
 import {COMMON_ADDRESS} from "../datamodels/common_address";
+import {ISO8601_DATE_REGEX} from "../../../node_modules/@angular/common/src/i18n/format_date";
 
 @Component({
   selector: 'app-event',
@@ -50,7 +51,7 @@ export class EventComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    // this.events.push({organizer: "user", room_name: "room 1", event_name: "event 1", event_date: "2018-22-07", event_costs: 10});
+    // this.events.push({organizer: "user", room_name: "room 1", event_name: "event 1", event_date: "2018-01-07", event_costs: 10});
     // this.events.push({organizer: "user 1", room_name: "room 2", event_name: "event 2", event_date: "2018-01-02", event_costs: 35});
     this.http.get(COMMON_ADDRESS + this.baseUrl).subscribe(data => {
       if (data['status'] === 'success') {
@@ -87,7 +88,10 @@ export class EventComponent implements OnInit, DoCheck {
   }
 
   canCreate() {
-    return this.newEvent.event_name.length > 0 && this.newEvent.event_date.length > 0 && this.newEvent.event_costs > 0;
+    const DateReg = /\d{4}-\d{2}-\d{2}/;
+    return this.newEvent.event_name.length > 0 &&
+      this.newEvent.event_date.length > 0 && DateReg.test(this.newEvent.event_date) &&
+      this.newEvent.event_costs > 0;
   }
 
   createEvent() {
@@ -241,10 +245,12 @@ export class EventComponent implements OnInit, DoCheck {
   }
 
   filtersValid() {
+    const DateReg = /\d{4}-\d{2}-\d{2}/;
     return (this.minCost >= 0) &&
       (this.maxCost >= 0) &&
       (this.minCost <= this.maxCost) &&
-      (this.minDate <= this.maxDate)
+      (this.minDate <= this.maxDate) && DateReg.test(this.minDate) && DateReg.test(this.maxDate);
+
   }
 
   filtersBack() {

@@ -19,7 +19,8 @@ export class LoginComponent {
   }
 
   readyToSend() {
-    return this.user.username.length !== 0 && this.user.password.length !== 0;
+    return this.user.username.length !== 0 && this.user.username.length < 20 &&
+      this.user.password.length !== 0 && this.user.password.length < 20;
   }
 
   login(): void {
@@ -28,7 +29,7 @@ export class LoginComponent {
     params.set('password', this.user.password);
     this.user.username = '';
     this.user.password = '';
-    this.setCookie("f_c", btoa("0&user"));
+    // this.setCookie("f_c", btoa("0&user"));
     this.http.post(COMMON_ADDRESS + this.baseUrl, params.toString(), {headers: this.headers, withCredentials: true}).subscribe(data => {
       if (data['status'] === 'success') {
         this.setCookie("f_c", data['cookie']);

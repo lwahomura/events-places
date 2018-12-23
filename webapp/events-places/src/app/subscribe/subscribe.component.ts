@@ -23,7 +23,9 @@ export class SubscribeComponent {
   }
 
   readyToSend() {
-    return this.subscriberName.length > 0 && this.subscriberEmail.length > 0;
+    const EmailReg = /[^@.]+@[^@.]+\.[^@.]+/;
+    return this.subscriberName.length > 0 && this.subscriberName.length < 20 &&
+      this.subscriberEmail.length > 0 && EmailReg.test(this.subscriberEmail);
   }
 
   subscribe(): void {
